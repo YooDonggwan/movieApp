@@ -36,6 +36,7 @@ class _MainScreen extends State<MovieApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
         title: Text(
           '나의 영화 기록함',
           style: TextStyle(
