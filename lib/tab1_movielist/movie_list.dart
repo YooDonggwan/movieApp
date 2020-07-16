@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../style/theme.dart' as Style;
 
 // 모든 영화 리스트 제공해주어야함
 // 관객순 / 개봉순 / 장르별
