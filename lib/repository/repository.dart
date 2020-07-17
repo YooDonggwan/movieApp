@@ -4,20 +4,20 @@ import 'package:movieApp/model/genre_response.dart';
 import 'package:movieApp/model/person_response.dart';
 
 class MovieRepository {
-  final String apiKey = "<<https://api.themoviedb.org/3/movie/550?api_key=069b7dd19fcd41e43c5fa72e49ded1f5>>";
+  final String apiKey = "069b7dd19fcd41e43c5fa72e49ded1f5";
   static String mainUrl = "https://api.themoviedb.org/3";
   final Dio _dio = Dio();
-  var getPopularUrl = '&mainUrl/movie/top_rated';
-  var getMoviesUrl = '&mainUrl/discover/movie';
-  var getPlayingUrl = '&mainUrl/movie/now_playing';
-  var getGenreUrl = '&mainUrl/genre/movie/list';
-  var getPersonUrl = '&mainUrl/trending/person/weak';
+  var getPopularUrl = '$mainUrl/movie/top_rated';
+  var getMoviesUrl = '$mainUrl/discover/movie';
+  var getPlayingUrl = '$mainUrl/movie/now_playing';
+  var getGenreUrl = '$mainUrl/genre/movie/list';
+  var getPersonUrl = '$mainUrl/trending/person/week';
 
   Future<MovieResponse> getMovies() async {
     var params = {
       "api_key": apiKey,
       "language": "en-US",
-      "page": 1,
+      "page": 1
     };
     try {
       Response response  = await _dio.get(getPopularUrl, queryParameters: params);
@@ -32,7 +32,7 @@ class MovieRepository {
     var params = {
       "api_key": apiKey,
       "language": "en-US",
-      "page": 1,
+      "page": 1
     };
     try {
       Response response  = await _dio.get(getPlayingUrl, queryParameters: params);
@@ -47,7 +47,7 @@ class MovieRepository {
     var params = {
       "api_key": apiKey,
       "language": "en-US",
-      "page": 1,
+      "page": 1
     };
     try {
       Response response  = await _dio.get(getGenreUrl, queryParameters: params);
@@ -60,7 +60,7 @@ class MovieRepository {
 
   Future<PersonResponse> getPerson() async {
     var params = {
-      "api_key": apiKey,
+      "api_key": apiKey
     };
     try {
       Response response  = await _dio.get(getPersonUrl, queryParameters: params);
@@ -76,7 +76,7 @@ class MovieRepository {
       "api_key": apiKey,
       "language": "en-US",
       "page": 1,
-      "with_genres": id,
+      "with_genres": id
     };
     try {
       Response response  = await _dio.get(getMoviesUrl, queryParameters: params);

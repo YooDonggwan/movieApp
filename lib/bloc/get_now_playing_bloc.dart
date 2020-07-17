@@ -11,7 +11,7 @@ class NowPlayingListBloc {
     _subject.sink.add(response);
   }
 
-  void dispose() async {
+  dispose() {
     _subject.close();
   }
   

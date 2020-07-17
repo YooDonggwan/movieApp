@@ -19,4 +19,4 @@ class GenresListBloc {
 
 }
 
-final moviesBloc = GenresListBloc();
+final genresBloc = GenresListBloc();

@@ -12,10 +12,7 @@ class PersonListBloc {
     _subject.sink.add(response);
   }
 
-  void drainStream() { _subject.value = null; }
-  @mustCallSuper
-  void dispose() async {
-    await _subject.drain();
+  dispose() {
     _subject.close();
   }
   

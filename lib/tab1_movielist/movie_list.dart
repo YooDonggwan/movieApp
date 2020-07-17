@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movieApp/tab1_movielist/widgets/now_playing.dart';
 import '../style/theme.dart' as Style;
 
 // 모든 영화 리스트 제공해주어야함
@@ -17,7 +18,7 @@ class _MovieListState extends State<MovieList> {
       backgroundColor: Colors.blueGrey[800],
       body: Padding(
         padding: EdgeInsets.only(top: 12.0),
-        child: Column(
+        child: ListView(
           children: <Widget>[
             Container(
               height: 40.0,
@@ -105,22 +106,23 @@ class _MovieListState extends State<MovieList> {
                       color: Colors.orange,
                       fontSize: 26.0,
                     ),
+                    textAlign: TextAlign.start,
                   ),
                 ),
-                SizedBox(
-                  height: 12.0,
-                ),
-                // Container(
-                //   width: double.infinity,
-                //   height: 230.0,
-                //   child: ListView(
-                //     scrollDirection: Axis.horizontal,
-                //     children: <Widget>[
-                //       // 여기에 이미지 들어가면 됨
-                //     ],
-                //   ),
-                // ),
               ],
+            ),
+            SizedBox(
+              height: 12.0,
+            ),
+            Container(
+              width: double.infinity,
+              height: 230.0,
+              child: ListView(
+                // scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  NowPlaying(),
+                ],
+              ),
             ),
           ],
         ),
@@ -129,37 +131,37 @@ class _MovieListState extends State<MovieList> {
   }
 }
 
-Widget MovieCard(String Title, String Rate, String imgPath) {
-  return InkWell(
-    onTap: () {},
-    child: Column(
-      children: <Widget>[
-        Card(
-          elevation: 0.0,
-          child: Image.asset(
-            imgPath,
-            fit: BoxFit.fill,
-            width: 130.0,
-            height: 160.0,
-          ),
-        ),
-        SizedBox(height: 12.0,),
-        Text(
-          Title,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 26.0,
-          ),
-        ),
-        Text(
-          Rate,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.0,
-          ),
-        ),
-      ],
-    ),
-  );
-}
+// Widget MovieCard(String Title, String Rate, String imgPath) {
+//   return InkWell(
+//     onTap: () {},
+//     child: Column(
+//       children: <Widget>[
+//         Card(
+//           elevation: 0.0,
+//           child: Image.asset(
+//             imgPath,
+//             fit: BoxFit.fill,
+//             width: 130.0,
+//             height: 160.0,
+//           ),
+//         ),
+//         SizedBox(height: 12.0,),
+//         Text(
+//           Title,
+//           style: TextStyle(
+//             color: Colors.white,
+//             fontWeight: FontWeight.bold,
+//             fontSize: 26.0,
+//           ),
+//         ),
+//         Text(
+//           Rate,
+//           style: TextStyle(
+//             color: Colors.white,
+//             fontSize: 18.0,
+//           ),
+//         ),
+//       ],
+//     ),
+//   );
+// }

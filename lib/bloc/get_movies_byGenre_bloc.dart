@@ -24,4 +24,4 @@ class MoviesListByGenreBloc {
 
 }
 
-final moviesBloc = MoviesListByGenreBloc();
+final moviesByGenreBloc = MoviesListByGenreBloc();
