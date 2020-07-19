@@ -80,7 +80,7 @@ class _NowPlayingState extends State<NowPlaying> {
       );
     } else {
       return Container(
-        height: 250,
+        height: 210,
         child: PageIndicatorContainer(
             align: IndicatorAlign.bottom,
             indicatorSpace: 8.0,

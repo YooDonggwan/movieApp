@@ -16,7 +16,6 @@ class _MovieListState extends State<MovieList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
       backgroundColor: Style.Colors.mainColor,
       body: ListView(
         scrollDirection: Axis.vertical,

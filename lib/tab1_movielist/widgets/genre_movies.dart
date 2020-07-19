@@ -129,6 +129,7 @@ class _GenreMoviesState extends State<GenreMovies> {
                       width: 100.0,
                       child: Text(
                         movies[index].title,
+                        textAlign: TextAlign.center,
                         maxLines: 2,
                         style: TextStyle(
                           height: 1.4,
@@ -147,7 +148,7 @@ class _GenreMoviesState extends State<GenreMovies> {
                           movies[index].rating.toString(),
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 10.0,
+                            fontSize: 8.5,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
