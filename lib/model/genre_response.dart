@@ -9,7 +9,7 @@ class GenreResponse {
 
   GenreResponse.fromJson(Map<String, dynamic> json)
     : genres = 
-          (json["results"] as List).map((i) => new Genre.fromJson(i)).toList(),
+          (json["genres"] as List).map((i) => new Genre.fromJson(i)).toList(),
           error = "";
 
   GenreResponse.withError(String errorValue)

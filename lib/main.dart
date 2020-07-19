@@ -38,7 +38,7 @@ class _MainScreen extends State<MovieApp> {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
         title: Text(
-          '나의 영화 기록함',
+          'M o v i a r y',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

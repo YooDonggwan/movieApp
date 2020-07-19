@@ -16,7 +16,7 @@ class MovieRepository {
   Future<MovieResponse> getMovies() async {
     var params = {
       "api_key": apiKey,
-      "language": "en-US",
+      "language": "ko-KR",
       "page": 1
     };
     try {
@@ -31,7 +31,7 @@ class MovieRepository {
   Future<MovieResponse> getPlayingMovies() async {
     var params = {
       "api_key": apiKey,
-      "language": "en-US",
+      "language": "ko-KR",
       "page": 1
     };
     try {
@@ -46,7 +46,7 @@ class MovieRepository {
   Future<GenreResponse> getGenres() async {
     var params = {
       "api_key": apiKey,
-      "language": "en-US",
+      "language": "ko-KR",
       "page": 1
     };
     try {
@@ -74,7 +74,7 @@ class MovieRepository {
   Future<MovieResponse> getMovieByGenre(int id) async {
     var params = {
       "api_key": apiKey,
-      "language": "en-US",
+      "language": "ko-KR",
       "page": 1,
       "with_genres": id
     };
