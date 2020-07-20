@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movieApp/tab1_movielist/widgets/genres.dart';
 import 'package:movieApp/tab1_movielist/widgets/now_playing.dart';
+import 'package:movieApp/tab1_movielist/widgets/top_movies.dart';
 import '../style/theme.dart' as Style;
 
 // 모든 영화 리스트 제공해주어야함
@@ -20,26 +21,26 @@ class _MovieListState extends State<MovieList> {
       body: ListView(
         scrollDirection: Axis.vertical,
         children: <Widget>[
-          SizedBox(height: 8.0,),
-          Row(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(left: 12.0),
-                child: Text(
-                  "신작 영화",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 26.0,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 12.0,),
+          // SizedBox(height: 8.0,),
+          // Row(
+          //   children: <Widget>[
+          //     Padding(
+          //       padding: EdgeInsets.only(left: 12.0),
+          //       child: Text(
+          //         "신작 영화",
+          //         style: TextStyle(
+          //           fontWeight: FontWeight.bold,
+          //           color: Colors.white,
+          //           fontSize: 26.0,
+          //         ),
+          //         textAlign: TextAlign.start,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(height: 12.0,),
           NowPlaying(),
-          SizedBox(height: 10.0,),
+          SizedBox(height: 13.0,),
           Row(
             children: <Widget>[
               Padding(
@@ -47,8 +48,8 @@ class _MovieListState extends State<MovieList> {
                 child: Text(
                   "장르별 영화",
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    color: Style.Colors.titleColor,
                     fontSize: 15.0,
                   ),
                   textAlign: TextAlign.start,
@@ -58,6 +59,7 @@ class _MovieListState extends State<MovieList> {
           ),
           SizedBox(height: 10.0,),
           GenresScreen(),
+          TopMovies(),
         ],
       ),
     );
@@ -65,37 +67,3 @@ class _MovieListState extends State<MovieList> {
   }
 }
 
-// Widget MovieCard(String Title, String Rate, String imgPath) {
-//   return InkWell(
-//     onTap: () {},
-//     child: Column(
-//       children: <Widget>[
-//         Card(
-//           elevation: 0.0,
-//           child: Image.asset(
-//             imgPath,
-//             fit: BoxFit.fill,
-//             width: 130.0,
-//             height: 160.0,
-//           ),
-//         ),
-//         SizedBox(height: 12.0,),
-//         Text(
-//           Title,
-//           style: TextStyle(
-//             color: Colors.white,
-//             fontWeight: FontWeight.bold,
-//             fontSize: 26.0,
-//           ),
-//         ),
-//         Text(
-//           Rate,
-//           style: TextStyle(
-//             color: Colors.white,
-//             fontSize: 18.0,
-//           ),
-//         ),
-//       ],
-//     ),
-//   );
-// }

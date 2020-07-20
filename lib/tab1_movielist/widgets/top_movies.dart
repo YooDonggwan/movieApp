@@ -1,45 +1,57 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movieApp/bloc/get_movies_byGenre_bloc.dart';
+import 'package:movieApp/bloc/get_movies_bloc.dart';
 import 'package:movieApp/model/movie.dart';
 import 'package:movieApp/model/movie_response.dart';
+import 'package:movieApp/model/person_response.dart';
 import 'package:movieApp/style/theme.dart' as Style;
 
-class GenreMovies extends StatefulWidget {
-  final int genreId;
-  GenreMovies({Key key, @required this.genreId}) : super(key: key);
-
+class TopMovies extends StatefulWidget {
   @override
-  _GenreMoviesState createState() => _GenreMoviesState(genreId);
+  _TopMoviesState createState() => _TopMoviesState();
 }
 
-class _GenreMoviesState extends State<GenreMovies> {
-  final int genreId;
-  _GenreMoviesState(this.genreId);
-
+class _TopMoviesState extends State<TopMovies> {
   @override
   void initState() {
     super.initState();
-    moviesByGenreBloc..getMoviesByGenre(genreId);
+    moviesBloc..getMovies();
   }
-
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<MovieResponse>(
-        stream: moviesByGenreBloc.subject.stream,
-        builder: (context, AsyncSnapshot<MovieResponse> snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data.error != null && snapshot.data.error.length > 0) {
-              return _buildErrorWidget(snapshot.data.error);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(left: 10.0, top: 20.0),
+          child: Text(
+            "인기 영화",
+            style: TextStyle(
+              color: Style.Colors.titleColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+            ),
+          ),
+        ),
+        SizedBox(height: 10.0,),
+        StreamBuilder<MovieResponse>(
+          stream: moviesBloc.subject.stream,
+          builder: (context, AsyncSnapshot<MovieResponse> snapshot) {
+            if(snapshot.hasData){
+              if(snapshot.data.error != null && snapshot.data.error.length > 0) {
+                return _buildErrorWidget(snapshot.data.error);
+              }
+              return _buildMoviesWidget(snapshot.data);
+            } else if(snapshot.hasError) {
+              return _buildErrorWidget(snapshot.error);
+            } else {
+              return _buildLoadingWidget();
             }
-            return _buildMoviesByGenreWidget(snapshot.data);
-          } else if (snapshot.hasError) {
-            return _buildErrorWidget(snapshot.error);
-          } else {
-            return _buildLoadingWidget();
-          }
-        });
+          },
+        ),
+      ],
+    );
   }
 
   Widget _buildLoadingWidget() {
@@ -71,7 +83,7 @@ class _GenreMoviesState extends State<GenreMovies> {
     );
   }
 
-  Widget _buildMoviesByGenreWidget(MovieResponse data) {
+  Widget _buildMoviesWidget(MovieResponse data) {
     List<Movie> movies = data.movies;
     if (movies.length == 0) {
       return Container(
@@ -79,7 +91,7 @@ class _GenreMoviesState extends State<GenreMovies> {
       );
     } else {
       return Container(
-        height: 230.0,
+        height: 280.0,
         padding: EdgeInsets.only(left: 10.0),
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
