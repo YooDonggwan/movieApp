@@ -17,6 +17,7 @@ class MovieRepository {
     var params = {
       "api_key": apiKey,
       "language": "ko-KR",
+      "region": "KR",
       "page": 1
     };
     try {
@@ -32,6 +33,7 @@ class MovieRepository {
     var params = {
       "api_key": apiKey,
       "language": "ko-KR",
+      "region": "KR",
       "page": 1
     };
     try {
@@ -47,6 +49,7 @@ class MovieRepository {
     var params = {
       "api_key": apiKey,
       "language": "ko-KR",
+      "region": "KR",
       "page": 1
     };
     try {
@@ -75,6 +78,7 @@ class MovieRepository {
     var params = {
       "api_key": apiKey,
       "language": "ko-KR",
+      "region": "KR",
       "page": 1,
       "with_genres": id
     };

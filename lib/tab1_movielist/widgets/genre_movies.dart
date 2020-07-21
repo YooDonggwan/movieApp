@@ -99,6 +99,7 @@ class _GenreMoviesState extends State<GenreMovies> {
                               shape: BoxShape.rectangle,
                             ),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Icon(
                                   EvaIcons.filmOutline,
