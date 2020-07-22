@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import './tab1_movielist/movie_list.dart';
-import './tab2_mylist/my_list.dart';
-import './tab3_profile/profile.dart';
+import 'package:movieApp/tab1_movielist/screen/movie_list.dart';
+import 'package:movieApp/tab2_mylist/my_list.dart';
+import 'package:movieApp/tab3_profile/profile.dart';
 
 void main() {
   runApp(MyApp());

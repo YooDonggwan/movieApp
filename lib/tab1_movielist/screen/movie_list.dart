@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movieApp/tab1_movielist/widgets/genres.dart';
 import 'package:movieApp/tab1_movielist/widgets/now_playing.dart';
 import 'package:movieApp/tab1_movielist/widgets/top_movies.dart';
-import '../style/theme.dart' as Style;
+import 'package:movieApp/style/theme.dart' as Style;
 
 // 모든 영화 리스트 제공해주어야함
 // 관객순 / 개봉순 / 장르별
@@ -21,24 +21,6 @@ class _MovieListState extends State<MovieList> {
       body: ListView(
         scrollDirection: Axis.vertical,
         children: <Widget>[
-          // SizedBox(height: 8.0,),
-          // Row(
-          //   children: <Widget>[
-          //     Padding(
-          //       padding: EdgeInsets.only(left: 12.0),
-          //       child: Text(
-          //         "신작 영화",
-          //         style: TextStyle(
-          //           fontWeight: FontWeight.bold,
-          //           color: Colors.white,
-          //           fontSize: 26.0,
-          //         ),
-          //         textAlign: TextAlign.start,
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // SizedBox(height: 12.0,),
           NowPlaying(),
           SizedBox(height: 13.0,),
           Row(
