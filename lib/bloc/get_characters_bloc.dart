@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movieApp/model/chracter_response.dart';
+import 'package:movieApp/model/character_response.dart';
 import 'package:movieApp/repository/repository.dart';
 import 'package:rxdart/subjects.dart';
 

@@ -1,4 +1,3 @@
-import './movie.dart';
 import './movie_detail.dart';
 
 class MovieDetailResponse {

@@ -1,4 +1,3 @@
-import './movie.dart';
 import './genre.dart';
 
 class GenreResponse {

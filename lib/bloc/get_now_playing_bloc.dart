@@ -6,7 +6,7 @@ class NowPlayingListBloc {
   final MovieRepository _repository = MovieRepository();
   final BehaviorSubject<MovieResponse> _subject = BehaviorSubject<MovieResponse>(); // behaviorsubject 클래스는 가장 최근에 받은 이벤트를 리스너가 받음
 
-  getMovies() async {
+  getPlayingMovies() async {
     MovieResponse response = await _repository.getPlayingMovies();
     _subject.sink.add(response);
   }

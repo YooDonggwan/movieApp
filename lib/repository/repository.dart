@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:movieApp/model/character.dart';
-import 'package:movieApp/model/chracter_response.dart';
+import 'package:movieApp/model/character_response.dart';
 import 'package:movieApp/model/movie_detail_response.dart';
 import 'package:movieApp/model/movie_response.dart';
 import 'package:movieApp/model/genre_response.dart';
