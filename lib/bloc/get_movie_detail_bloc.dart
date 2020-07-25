@@ -23,4 +23,4 @@ class MovieDetailBloc {
 
 }
 
-final chractersBloc = MovieDetailBloc();
+final movieDetailBloc = MovieDetailBloc();

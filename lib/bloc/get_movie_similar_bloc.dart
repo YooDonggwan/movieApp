@@ -23,4 +23,4 @@ class SimilarMoviesBloc {
 
 }
 
-final chractersBloc = SimilarMoviesBloc();
+final similarMoviesBloc = SimilarMoviesBloc();
