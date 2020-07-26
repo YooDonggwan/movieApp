@@ -1,4 +1,5 @@
 import 'package:movieApp/model/genre.dart';
+import 'package:movieApp/model/produc_country.dart';
 
 class MovieDetail {
   final int id;
@@ -8,6 +9,7 @@ class MovieDetail {
   final String overview;
   final int runtime;
   final String releaseDate;
+  final List<ProductionCountry> originCountry;
 
   MovieDetail(
     this.id,
@@ -16,7 +18,8 @@ class MovieDetail {
     this.genres,
     this.overview,
     this.runtime,
-    this.releaseDate
+    this.releaseDate,
+    this.originCountry
   );
 
   MovieDetail.fromJson(Map<String, dynamic> json)
@@ -26,6 +29,7 @@ class MovieDetail {
           genres = (json["genres"] as List).map((i) => new Genre.fromJson(i)).toList(),
           overview = json["overview"],
           runtime = json["runtime"],
-          releaseDate = json["release_date"];
+          releaseDate = json["release_date"],
+          originCountry = (json["production_countries"] as List).map((i) => new ProductionCountry.fromJson(i)).toList();
 
 }

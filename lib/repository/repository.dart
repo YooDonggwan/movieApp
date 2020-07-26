@@ -5,6 +5,7 @@ import 'package:movieApp/model/movie_detail_response.dart';
 import 'package:movieApp/model/movie_response.dart';
 import 'package:movieApp/model/genre_response.dart';
 import 'package:movieApp/model/person_response.dart';
+import 'package:movieApp/model/produc_country_response.dart';
 import 'package:movieApp/model/teaser_response.dart';
 
 class MovieRepository {
@@ -107,6 +108,20 @@ class MovieRepository {
     } catch(error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return MovieDetailResponse.withError("$error");
+    }
+  }
+
+  Future<ProductionCountryResponse> getCountries(int id) async {
+    var params = {
+      "api_key": apiKey,
+      "language": "ko-KR",
+    };
+    try {
+      Response response  = await _dio.get(movieUrl + "/$id", queryParameters: params);
+      return ProductionCountryResponse.fromJson(response.data);
+    } catch(error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return ProductionCountryResponse.withError("$error");
     }
   }
 

@@ -23,4 +23,4 @@ class CharactersBloc {
 
 }
 
-final chractersBloc = CharactersBloc();
+final charactersBloc = CharactersBloc();

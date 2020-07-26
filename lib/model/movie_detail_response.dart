@@ -1,17 +1,16 @@
 import './movie_detail.dart';
 
 class MovieDetailResponse {
-  final List<MovieDetail> movieDetails;
+  final MovieDetail movieDetails;
   final String error;
 
   MovieDetailResponse(this.movieDetails, this.error);
 
   MovieDetailResponse.fromJson(Map<String, dynamic> json)
-    : movieDetails = 
-          (json["results"] as List).map((i) => new MovieDetail.fromJson(i)).toList(),
-          error = "";
+    : movieDetails = MovieDetail.fromJson(json),
+      error = "";
 
   MovieDetailResponse.withError(String errorValue)
-    : movieDetails = List(),
-    error = errorValue;
+    : movieDetails = MovieDetail(null, null, null, null, null, null, null, null),
+      error = errorValue;
 }

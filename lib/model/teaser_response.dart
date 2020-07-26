@@ -5,7 +5,7 @@ class TeaserResponse {
   final String error;
 
   TeaserResponse.fromJson(Map<String, dynamic> json)
-    : teaser = (json["result"] as List).map((i) => new Teaser.fromJson(i)).toList(),
+    : teaser = (json["results"] as List).map((i) => new Teaser.fromJson(i)).toList(),
       error = ""; 
 
   TeaserResponse.withError(String errorValue)

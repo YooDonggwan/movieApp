@@ -6,7 +6,12 @@ import 'package:movieApp/model/movie.dart';
 import 'package:movieApp/model/teaser.dart';
 import 'package:movieApp/model/teaser_response.dart';
 import 'package:movieApp/style/theme.dart' as Style;
+import 'package:movieApp/tab1_movielist/screen/teaser_player.dart';
+import 'package:movieApp/tab1_movielist/widgets/characters.dart';
+import 'package:movieApp/tab1_movielist/widgets/movie_info.dart';
+import 'package:movieApp/tab1_movielist/widgets/similar_movies.dart';
 import 'package:sliver_fab/sliver_fab.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieDetailScreen extends StatefulWidget {
   final Movie movie;
@@ -166,6 +171,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 10.0,),
+                    MovieInfo(id: movie.id),
+                    Characters(id: movie.id),
+                    SimilarMovies(id: movie.id),
                   ]),
                 ),
               ),
@@ -195,7 +204,20 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     return FloatingActionButton(
       backgroundColor: Style.Colors.secondColor,
       child: Icon(Icons.play_arrow),
-      onPressed: null,
+      onPressed: () {
+        Navigator.push(context,
+          MaterialPageRoute(
+            builder: (context) => TeaserPlayerScreen(
+              controller: YoutubePlayerController(
+              initialVideoId: teaser[0].key,
+              flags: YoutubePlayerFlags(
+                autoPlay: true,
+              ),
+              ),
+            ),
+          ),
+        );
+      }
     );
   }
 }
