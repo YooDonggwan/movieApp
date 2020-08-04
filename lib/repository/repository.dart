@@ -6,6 +6,7 @@ import 'package:movieApp/model/movie_response.dart';
 import 'package:movieApp/model/genre_response.dart';
 import 'package:movieApp/model/person_response.dart';
 import 'package:movieApp/model/produc_country_response.dart';
+import 'package:movieApp/model/search_result_response.dart';
 import 'package:movieApp/model/teaser_response.dart';
 
 class MovieRepository {
@@ -18,6 +19,7 @@ class MovieRepository {
   var getGenreUrl = '$mainUrl/genre/movie/list';
   var getPersonUrl = '$mainUrl/trending/person/week';
   var movieUrl = '$mainUrl/movie';
+  var getSearchUrl = '$mainUrl/search/movie';
 
   Future<MovieResponse> getMovies() async {
     var params = {
@@ -34,6 +36,7 @@ class MovieRepository {
       return MovieResponse.withError("$error");
     }
   }
+
 
   Future<MovieResponse> getPlayingMovies() async {
     var params = {
@@ -164,6 +167,21 @@ class MovieRepository {
     } catch(error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return TeaserResponse.withError("$error");
+    }
+  }
+
+  Future<SearchResultResponse> getSearchResult(int id) async {
+    var params = {
+      "api_key": apiKey,
+      "language": "ko-KR",
+      "region": "KR",
+    };
+    try {
+      Response response  = await _dio.get(getSearchUrl, queryParameters: params);
+      return SearchResultResponse.fromJson(response.data);
+    } catch(error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return SearchResultResponse.withError("$error");
     }
   }
 }

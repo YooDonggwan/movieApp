@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movieApp/tab1_movielist/screen/movie_search_delegate.dart';
 import 'package:movieApp/tab1_movielist/widgets/genres.dart';
 import 'package:movieApp/tab1_movielist/widgets/now_playing.dart';
 import 'package:movieApp/tab1_movielist/widgets/top_movies.dart';
@@ -17,6 +18,26 @@ class _MovieListState extends State<MovieList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
+        title: Text(
+          '영화 찾기',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              // showSearch()
+              showSearch(context: context, delegate: MovieSearchDelegate());
+            },
+          ),
+        ],
+      ),
       backgroundColor: Style.Colors.mainColor,
       body: ListView(
         scrollDirection: Axis.vertical,

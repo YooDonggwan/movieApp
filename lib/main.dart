@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'fltter demo',
+      title: 'Moviary',
       home: MovieApp(),
     );
   }
@@ -35,17 +35,17 @@ class _MainScreen extends State<MovieApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        title: Text(
-          'M o v i a r y',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.blueGrey,
+      //   title: Text(
+      //     'M o v i a r y',
+      //     style: TextStyle(
+      //       color: Colors.white,
+      //       fontWeight: FontWeight.bold,
+      //     ),
+      //   ),
+      //   centerTitle: true,
+      // ),
       body: _tabs[_index],
       backgroundColor: Colors.blueGrey[700],
       bottomNavigationBar: BottomNavigationBar(
