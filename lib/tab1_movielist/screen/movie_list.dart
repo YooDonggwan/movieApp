@@ -6,8 +6,7 @@ import 'package:movieApp/tab1_movielist/widgets/top_movies.dart';
 import 'package:movieApp/style/theme.dart' as Style;
 
 // 모든 영화 리스트 제공해주어야함
-// 관객순 / 개봉순 / 장르별
-// 재정리가 되어야 하므로 stateful이 맞는듯
+// 인기 / 신작 / 장르
 
 class MovieList extends StatefulWidget {
   @override

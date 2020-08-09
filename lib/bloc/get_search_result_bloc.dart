@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movieApp/model/movie_detail_response.dart';
 import 'package:movieApp/model/search_result_response.dart';
 import 'package:movieApp/repository/repository.dart';
 import 'package:rxdart/subjects.dart';
