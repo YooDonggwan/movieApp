@@ -5,10 +5,10 @@ import 'package:rxdart/subjects.dart';
 
 class SearchResultBloc {
   final MovieRepository _repository = MovieRepository();
-  final BehaviorSubject<SearchResultResponse> _subject = BehaviorSubject<SearchResultResponse>(); // behaviorsubject 클래스는 가장 최근에 받은 이벤트를 리스너가 받음
+  final BehaviorSubject<SearchResultResponse> _subject = BehaviorSubject<SearchResultResponse>();
 
-  getSearchResult(int id) async {
-    SearchResultResponse response = await _repository.getSearchResult(id);
+  getSearchResult(String query) async {
+    SearchResultResponse response = await _repository.getSearchResult(query);
     _subject.sink.add(response);
   }
 

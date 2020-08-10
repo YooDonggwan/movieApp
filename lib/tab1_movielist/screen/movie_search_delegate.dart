@@ -1,15 +1,14 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movieApp/bloc/get_search_result_bloc.dart';
 import 'package:movieApp/model/search_result.dart';
 import 'package:movieApp/model/search_result_response.dart';
 import 'package:movieApp/style/theme.dart' as Style;
-import 'package:movieApp/tab1_movielist/screen/detail_screen.dart';
 
-class MovieSearchDelegate extends SearchDelegate {
+class MovieSearchDelegate extends SearchDelegate<SearchResult> {
   @override
   List<Widget> buildActions(BuildContext context) {
+    // action for app bar
     return [
       IconButton(
         icon: Icon(Icons.clear),
@@ -22,6 +21,7 @@ class MovieSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildLeading(BuildContext context) {
+    // leading icon on the left of the appbar
     return IconButton(
       icon: Icon(Icons.arrow_back),
       onPressed: () {
@@ -32,6 +32,8 @@ class MovieSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+    searchResultBloc..getSearchResult(query);
+    // show some result based on the selection
     return StreamBuilder<SearchResultResponse>(
         stream: searchResultBloc.subject.stream,
         builder: (context, AsyncSnapshot<SearchResultResponse> snapshot) {
@@ -50,6 +52,7 @@ class MovieSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    // show when someone searches for something
     return Column();
   }
 
@@ -83,74 +86,36 @@ class MovieSearchDelegate extends SearchDelegate {
   }
 
   Widget _buildSearchResultWidget(SearchResultResponse data) {
-    SearchResult searchResult = data.searchResult;
+    List<SearchResult> searchResult = data.searchResult;
 
-    if(searchResult == null) {
+    if (searchResult == null) {
       return Container(
         child: Text("검색 결과가 없습니다."),
       );
-    }
-    else {
-      return GridView.count(
-        crossAxisCount: 3,
+    } else {
+      return ListView(
         children: <Widget>[
-          searchResult.poster == null
-            ? Container(
-                width: 120.0,
-                height: 180.0,
-                decoration: BoxDecoration(
-                  color: Style.Colors.secondColor,
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(2.0)),
-                  shape: BoxShape.rectangle,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(
-                      EvaIcons.filmOutline,
-                      color: Colors.white,
-                      size: 50.0,
-                    )
-                  ],
-                ),
-              )
-            : Container(
-                width: 120.0,
-                height: 180.0,
-                decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(2.0)),
-                  shape: BoxShape.rectangle,
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        "https://image.tmdb.org/t/p/w200/" +
-                            searchResult.poster),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-          SizedBox(
-            height: 10.0,
-          ),
-          Container(
-            width: 100.0,
-            child: Text(
-              searchResult.title,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              style: TextStyle(
-                height: 1.4,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 11.0,
-              ),
+          Text(
+            "검색 결과", 
+            style: TextStyle(
+              color: Style.Colors.titleColor,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
             ),
+          ),
+          GridView.count(
+            physics: NeverScrollableScrollPhysics(),
+            crossAxisCount: 3,
+            shrinkWrap: true,
+            children: <Widget>[
+              
+            ],
           ),
         ],
       );
     }
   }
+
 
 
 }

@@ -170,10 +170,12 @@ class MovieRepository {
     }
   }
 
-  Future<SearchResultResponse> getSearchResult(int id) async {
+  Future<SearchResultResponse> getSearchResult(String query) async {
     var params = {
       "api_key": apiKey,
       "language": "ko-KR",
+      "query": query,
+      "page": 1,
       "region": "KR",
     };
     try {
