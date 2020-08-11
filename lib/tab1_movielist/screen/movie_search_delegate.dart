@@ -106,6 +106,7 @@ class MovieSearchDelegate extends SearchDelegate<SearchResult> {
           GridView.builder(
             physics: NeverScrollableScrollPhysics(),
             itemCount: searchResult.length,
+            shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
             ),
@@ -148,23 +149,26 @@ class MovieSearchDelegate extends SearchDelegate<SearchResult> {
                           ),
                         ),
                       ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Container(
-                  width: 100.0,
-                  child: Text(
-                    searchResult[index].title,
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    style: TextStyle(
-                      height: 1.4,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 11.0,
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Container(
+                    width: 100.0,
+                    child: Text(
+                      searchResult[index].title,
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      style: TextStyle(
+                        height: 1.4,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 11.0,
+                      ),
                     ),
                   ),
-                ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
                 ],
               );
             }, 
