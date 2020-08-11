@@ -103,19 +103,79 @@ class MovieSearchDelegate extends SearchDelegate<SearchResult> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          GridView.count(
+          GridView.builder(
             physics: NeverScrollableScrollPhysics(),
-            crossAxisCount: 3,
-            shrinkWrap: true,
-            children: <Widget>[
-              
-            ],
+            itemCount: searchResult.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            itemBuilder: (BuildContext context, int index) {  
+              return ListView(
+                children: <Widget>[
+                  searchResult[index].poster == null
+                    ? Container(
+                        width: 120.0,
+                        height: 180.0,
+                        decoration: BoxDecoration(
+                          color: Style.Colors.secondColor,
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(2.0)),
+                          shape: BoxShape.rectangle,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              EvaIcons.filmOutline,
+                              color: Colors.white,
+                              size: 50.0,
+                            )
+                          ],
+                        ),
+                      )
+                    : Container(
+                        width: 120.0,
+                        height: 180.0,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(2.0)),
+                          shape: BoxShape.rectangle,
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                "https://image.tmdb.org/t/p/w200/" +
+                                    searchResult[index].poster),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Container(
+                  width: 100.0,
+                  child: Text(
+                    searchResult[index].title,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    style: TextStyle(
+                      height: 1.4,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 11.0,
+                    ),
+                  ),
+                ),
+                ],
+              );
+            }, 
           ),
         ],
       );
     }
   }
 
-
-
+  // List<int>.generate(searchResult.length, (i) => i + 1).map((index)
+  List<int> generateNumbers(int length) {
+    return List<int>.generate(length, (index) => index + 1);
+  }
 }
