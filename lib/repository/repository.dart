@@ -174,8 +174,8 @@ class MovieRepository {
     var params = {
       "api_key": apiKey,
       "language": "ko-KR",
-      "query": query,
       "page": 1,
+      "query": query,
       "region": "KR",
     };
     try {

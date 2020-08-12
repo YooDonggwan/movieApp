@@ -6,6 +6,16 @@ import 'package:movieApp/model/search_result_response.dart';
 import 'package:movieApp/style/theme.dart' as Style;
 
 class MovieSearchDelegate extends SearchDelegate<SearchResult> {
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
+    return theme.copyWith(
+      primaryColor: Colors.blueGrey,
+    );
+  }  
+
   @override
   List<Widget> buildActions(BuildContext context) {
     // action for app bar
@@ -41,7 +51,7 @@ class MovieSearchDelegate extends SearchDelegate<SearchResult> {
             if (snapshot.data.error != null && snapshot.data.error.length > 0) {
               return _buildErrorWidget(snapshot.data.error);
             }
-            return _buildSearchResultWidget(snapshot.data);
+            return _buildSearchResultWidget(snapshot.data, context);
           } else if (snapshot.hasError) {
             return _buildErrorWidget(snapshot.error);
           } else {
@@ -85,7 +95,7 @@ class MovieSearchDelegate extends SearchDelegate<SearchResult> {
     );
   }
 
-  Widget _buildSearchResultWidget(SearchResultResponse data) {
+  Widget _buildSearchResultWidget(SearchResultResponse data, BuildContext context) {
     List<SearchResult> searchResult = data.searchResult;
 
     if (searchResult == null) {
@@ -95,13 +105,20 @@ class MovieSearchDelegate extends SearchDelegate<SearchResult> {
     } else {
       return ListView(
         children: <Widget>[
-          Text(
-            "검색 결과", 
-            style: TextStyle(
-              color: Style.Colors.titleColor,
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
+          Container(
+            color: Style.Colors.mainColor,
+            child: Text(
+              "검색 결과",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Style.Colors.titleColor,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
             ),
+          ),
+          SizedBox(
+            height: 10.0,
           ),
           GridView.builder(
             physics: NeverScrollableScrollPhysics(),
@@ -109,60 +126,65 @@ class MovieSearchDelegate extends SearchDelegate<SearchResult> {
             shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
+              childAspectRatio: (MediaQuery.of(context).size.width / 1.5) / (MediaQuery.of(context).size.height / 2),
             ),
-            itemBuilder: (BuildContext context, int index) {  
-              return ListView(
+            itemBuilder: (BuildContext context, int index) {
+              return Column(
                 children: <Widget>[
                   searchResult[index].poster == null
-                    ? Container(
-                        width: 120.0,
-                        height: 180.0,
-                        decoration: BoxDecoration(
-                          color: Style.Colors.secondColor,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(2.0)),
-                          shape: BoxShape.rectangle,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              EvaIcons.filmOutline,
-                              color: Colors.white,
-                              size: 50.0,
-                            )
-                          ],
-                        ),
-                      )
-                    : Container(
-                        width: 120.0,
-                        height: 180.0,
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(2.0)),
-                          shape: BoxShape.rectangle,
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                "https://image.tmdb.org/t/p/w200/" +
-                                    searchResult[index].poster),
-                            fit: BoxFit.cover,
+                      ? Expanded(
+                          child: Container(
+                            width: 120.0,
+                            height: 180.0,
+                            decoration: BoxDecoration(
+                              color: Style.Colors.secondColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(2.0)),
+                              shape: BoxShape.rectangle,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  EvaIcons.filmOutline,
+                                  color: Colors.white,
+                                  size: 50.0,
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      : Expanded(
+                          child: Container(
+                            width: 170,
+                            height: 160.0,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(2.0)),
+                              shape: BoxShape.rectangle,
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                    "https://image.tmdb.org/t/p/w200/" +
+                                        searchResult[index].poster),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
                   SizedBox(
-                    height: 10.0,
+                    height: 5.0,
                   ),
                   Container(
-                    width: 100.0,
+                    width: 160,
                     child: Text(
                       searchResult[index].title,
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       style: TextStyle(
                         height: 1.4,
-                        color: Colors.white,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: 11.0,
+                        fontSize: 15.0,
                       ),
                     ),
                   ),
@@ -171,7 +193,7 @@ class MovieSearchDelegate extends SearchDelegate<SearchResult> {
                   ),
                 ],
               );
-            }, 
+            },
           ),
         ],
       );

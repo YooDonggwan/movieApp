@@ -17,6 +17,7 @@ class _MovieListState extends State<MovieList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Style.Colors.mainColor,
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
         title: Text(
@@ -37,7 +38,6 @@ class _MovieListState extends State<MovieList> {
           ),
         ],
       ),
-      backgroundColor: Style.Colors.mainColor,
       body: ListView(
         scrollDirection: Axis.vertical,
         children: <Widget>[
