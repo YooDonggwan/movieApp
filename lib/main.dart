@@ -49,6 +49,7 @@ class _MainScreen extends State<MovieApp> {
       body: _tabs[_index],
       backgroundColor: Colors.blueGrey[700],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.blueGrey,
         onTap: (index) {
           setState(() {
             _index = index;
@@ -57,16 +58,38 @@ class _MainScreen extends State<MovieApp> {
         currentIndex: _index,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('영화찾기'), 
+            icon: Icon(Icons.home,
+              color: Colors.white,
+            ),
+            title: Text('영화찾기',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 12.0,
+              ),
+            ), 
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.movie),
-            title: Text('영화 기록장'),
+            icon: Icon(Icons.movie,
+              color: Colors.white,
+            ),
+            title: Text('영화 기록장',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('프로필'),
+            icon: Icon(Icons.person,
+              color: Colors.white,
+            ),
+            title: Text('프로필',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),

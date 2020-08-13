@@ -21,16 +21,19 @@ class _MovieListState extends State<MovieList> {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
         title: Text(
-          '영화 찾기',
+          'M o v i a r y',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
+            fontSize: 27.0,
           ),
         ),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: Icon(Icons.search,
+              size: 30.0,
+            ),
             onPressed: () {
               // showSearch()
               showSearch(context: context, delegate: MovieSearchDelegate());
