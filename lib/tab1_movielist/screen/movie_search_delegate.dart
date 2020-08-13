@@ -4,6 +4,8 @@ import 'package:movieApp/bloc/get_search_result_bloc.dart';
 import 'package:movieApp/model/search_result.dart';
 import 'package:movieApp/model/search_result_response.dart';
 import 'package:movieApp/style/theme.dart' as Style;
+import 'package:movieApp/tab1_movielist/screen/detail_screen.dart';
+import 'package:movieApp/tab1_movielist/screen/detail_screen_bySearch.dart';
 
 class MovieSearchDelegate extends SearchDelegate<SearchResult> {
 
@@ -103,99 +105,114 @@ class MovieSearchDelegate extends SearchDelegate<SearchResult> {
         child: Text("검색 결과가 없습니다."),
       );
     } else {
-      return ListView(
-        children: <Widget>[
-          Container(
-            color: Style.Colors.mainColor,
-            child: Text(
-              "검색 결과",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Style.Colors.titleColor,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+      return Scaffold(
+        backgroundColor: Style.Colors.mainColor,
+        body: ListView(
+          children: <Widget>[
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0, top: 15.0),
+                child: Text(
+                  "검색 결과",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    color: Style.Colors.titleColor,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          GridView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: searchResult.length,
-            shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: (MediaQuery.of(context).size.width / 1.5) / (MediaQuery.of(context).size.height / 2),
+            SizedBox(
+              height: 10.0,
             ),
-            itemBuilder: (BuildContext context, int index) {
-              return Column(
-                children: <Widget>[
-                  searchResult[index].poster == null
-                      ? Expanded(
-                          child: Container(
-                            width: 120.0,
-                            height: 180.0,
-                            decoration: BoxDecoration(
-                              color: Style.Colors.secondColor,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(2.0)),
-                              shape: BoxShape.rectangle,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  EvaIcons.filmOutline,
-                                  color: Colors.white,
-                                  size: 50.0,
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                      : Expanded(
-                          child: Container(
-                            width: 170,
-                            height: 160.0,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(2.0)),
-                              shape: BoxShape.rectangle,
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://image.tmdb.org/t/p/w200/" +
-                                        searchResult[index].poster),
-                                fit: BoxFit.cover,
+            GridView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: searchResult.length,
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: (MediaQuery.of(context).size.width / 1.5) / (MediaQuery.of(context).size.height / 2),
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => MovieDetailScreenBySearch(movie: searchResult[index])
+                      ));
+                    },
+                    child: Column(
+                      children: <Widget>[
+                        searchResult[index].poster == null
+                            ? Expanded(
+                                child: Container(
+                                  width: 120.0,
+                                  height: 180.0,
+                                  decoration: BoxDecoration(
+                                    color: Style.Colors.secondColor,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(2.0)),
+                                    shape: BoxShape.rectangle,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(
+                                        EvaIcons.filmOutline,
+                                        color: Colors.white,
+                                        size: 50.0,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : Expanded(
+                                child: Container(
+                                  width: 170,
+                                  height: 160.0,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(2.0)),
+                                    shape: BoxShape.rectangle,
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          "https://image.tmdb.org/t/p/w200/" +
+                                              searchResult[index].poster),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
                               ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Container(
+                          width: 160,
+                          child: Text(
+                            searchResult[index].title,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            style: TextStyle(
+                              height: 1.4,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15.0,
                             ),
                           ),
                         ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Container(
-                    width: 160,
-                    child: Text(
-                      searchResult[index].title,
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                      style: TextStyle(
-                        height: 1.4,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15.0,
-                      ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                ],
-              );
-            },
-          ),
-        ],
+                );
+              },
+            ),
+          ],
+        ),
       );
     }
   }

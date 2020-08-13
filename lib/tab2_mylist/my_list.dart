@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './movie_note.dart';
+import 'screen/movie_note.dart';
 
 // 3개의 메뉴
 // 이미 본 영화 / 보고 싶은 영화 / 명작 보관함
@@ -17,7 +17,7 @@ class _MyListState extends State<MyList> {
       body: ListView(
         children: <Widget>[
           Card(
-            // 이미 본 영화 목록들을 포스터 형태로 스크롤 가능하게 만들면 좋을듯 
+            // 이미 본 영화 목록들을 포스터 형태로 스크롤 가능하게 만들면 좋을듯 - 피드처럼 만들고 한줄평 남길 수 있게 해보기
             // 아니면 영화 포스터를 좌우로 스크롤 가능하게 만들고, 포스터 밑에 간단한 정보들이 뜨면 좋을 수도
             child: ListTile(
               leading: Icon(Icons.movie_creation),

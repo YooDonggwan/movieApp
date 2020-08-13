@@ -100,6 +100,20 @@ class MovieRepository {
     }
   }
 
+  Future<MovieDetailResponse> getDetailsBySearch(int id) async {
+    var params = {
+      "api_key": apiKey,
+      "language": "ko-KR",
+    };
+    try {
+      Response response  = await _dio.get(movieUrl + "/$id", queryParameters: params);
+      return MovieDetailResponse.fromJson(response.data);
+    } catch(error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return MovieDetailResponse.withError("$error");
+    }
+  }
+
   Future<MovieDetailResponse> getMovieDetail(int id) async {
     var params = {
       "api_key": apiKey,
