@@ -1,14 +1,29 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:movieApp/model/movie.dart';
 import 'package:movieApp/style/theme.dart' as Style;
+import 'package:movieApp/tab1_movielist/screen/detail_screen.dart';
 import 'package:movieApp/tab2_mylist/widget/movie_feed.dart';
 
-class SeenMovie extends StatefulWidget {
+class SeenMovieScreen extends StatefulWidget {
+  SeenMovieScreen({Key key}) : super(key : key);
   @override
-  _SeenMovieState createState() => _SeenMovieState();
+  _SeenMovieScreenState createState() => _SeenMovieScreenState();
 }
 
-class _SeenMovieState extends State<SeenMovie> {
+class _SeenMovieScreenState extends State<SeenMovieScreen> {
+  final List<Movie> seenMovieList = [];
+  
+  set setSeenMovie(Movie seenMovie) {
+    seenMovieList.add(seenMovie);
+  }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +44,7 @@ class _SeenMovieState extends State<SeenMovie> {
         padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
         child: GridView.builder(
           physics: NeverScrollableScrollPhysics(),
-          itemCount: searchResult.length,
+          itemCount: seenMovieList.length,
           shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -41,12 +56,12 @@ class _SeenMovieState extends State<SeenMovie> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => MovieDetailScreenBySearch(movie: searchResult[index])
+                      builder: (context) => MovieDetailScreen(movie: seenMovieList[index])
                   ));
                 },
                 child: Column(
                   children: <Widget>[
-                    searchResult[index].poster == null
+                    seenMovieList[index].poster == null
                         ? Expanded(
                             child: Container(
                               width: 120.0,
@@ -80,7 +95,7 @@ class _SeenMovieState extends State<SeenMovie> {
                                 image: DecorationImage(
                                   image: NetworkImage(
                                       "https://image.tmdb.org/t/p/w200/" +
-                                          searchResult[index].poster),
+                                          seenMovieList[index].poster),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -92,7 +107,7 @@ class _SeenMovieState extends State<SeenMovie> {
                     Container(
                       width: 160,
                       child: Text(
-                        searchResult[index].title,
+                        seenMovieList[index].title,
                         textAlign: TextAlign.center,
                         maxLines: 2,
                         style: TextStyle(
@@ -115,4 +130,5 @@ class _SeenMovieState extends State<SeenMovie> {
       ),
     );
   }
+
 }

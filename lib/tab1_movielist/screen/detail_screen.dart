@@ -11,19 +11,20 @@ import 'package:movieApp/tab1_movielist/screen/teaser_player.dart';
 import 'package:movieApp/tab1_movielist/widgets/characters.dart';
 import 'package:movieApp/tab1_movielist/widgets/movie_info.dart';
 import 'package:movieApp/tab1_movielist/widgets/similar_movies.dart';
+import 'package:movieApp/tab2_mylist/screen/seen_movie_screen.dart';
 import 'package:sliver_fab/sliver_fab.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieDetailScreen extends StatefulWidget {
   final Movie movie;
   MovieDetailScreen({Key key, @required this.movie}) : super(key: key);
-
   @override
   _MovieDetailScreenState createState() => _MovieDetailScreenState(movie);
 }
 
 class _MovieDetailScreenState extends State<MovieDetailScreen> {
   final Movie movie;
+
   _MovieDetailScreenState(this.movie);
 
   @override
@@ -56,7 +57,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               label: '이미 본 영화 추가',
               child: Icon(Icons.movie_creation),
               onTap: () {
-                
+
               },
             ),
             SpeedDialChild(
