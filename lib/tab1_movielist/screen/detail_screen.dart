@@ -4,11 +4,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:movieApp/bloc/get_movie_teasers_bloc.dart';
 import 'package:movieApp/model/movie.dart';
+import 'package:movieApp/tab1_movielist/widgets/casts.dart';
 import 'package:movieApp/model/teaser.dart';
 import 'package:movieApp/model/teaser_response.dart';
 import 'package:movieApp/style/theme.dart' as Style;
 import 'package:movieApp/tab1_movielist/screen/teaser_player.dart';
-import 'package:movieApp/tab1_movielist/widgets/characters.dart';
+import 'package:movieApp/tab1_movielist/widgets/casts.dart';
 import 'package:movieApp/tab1_movielist/widgets/movie_info.dart';
 import 'package:movieApp/tab1_movielist/widgets/similar_movies.dart';
 import 'package:movieApp/tab2_mylist/screen/seen_movie_screen.dart';
@@ -213,7 +214,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     ),
                     SizedBox(height: 10.0,),
                     MovieInfo(id: movie.id),
-                    Characters(id: movie.id),
+                    Casts(id: movie.id),
                     SimilarMovies(id: movie.id),
                   ]),
                 ),

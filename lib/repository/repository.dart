@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:movieApp/model/character.dart';
-import 'package:movieApp/model/character_response.dart';
+import 'package:movieApp/model/cast.dart';
+import 'package:movieApp/model/cast_response.dart';
 import 'package:movieApp/model/movie_detail_response.dart';
 import 'package:movieApp/model/movie_response.dart';
 import 'package:movieApp/model/genre_response.dart';
@@ -142,17 +142,17 @@ class MovieRepository {
     }
   }
 
-  Future<CharacterResponse> getCharacter(int id) async {
+  Future<CastResponse> getCast(int id) async {
     var params = {
       "api_key": apiKey,
       "language": "ko-KR",
     };
     try {
       Response response  = await _dio.get(movieUrl + "/$id" + "/credits", queryParameters: params);
-      return CharacterResponse.fromJson(response.data);
+      return CastResponse.fromJson(response.data);
     } catch(error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
-      return CharacterResponse.withError("$error");
+      return CastResponse.withError("$error");
     }
   }
 

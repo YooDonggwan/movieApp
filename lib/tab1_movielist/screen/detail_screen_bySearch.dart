@@ -8,7 +8,7 @@ import 'package:movieApp/model/teaser.dart';
 import 'package:movieApp/model/teaser_response.dart';
 import 'package:movieApp/style/theme.dart' as Style;
 import 'package:movieApp/tab1_movielist/screen/teaser_player.dart';
-import 'package:movieApp/tab1_movielist/widgets/characters.dart';
+import 'package:movieApp/tab1_movielist/widgets/casts.dart';
 import 'package:movieApp/tab1_movielist/widgets/movie_info.dart';
 import 'package:movieApp/tab1_movielist/widgets/similar_movies.dart';
 import 'package:sliver_fab/sliver_fab.dart';
@@ -139,7 +139,7 @@ class _MovieDetailScreenBySearchState extends State<MovieDetailScreenBySearch> {
                     ),
                     SizedBox(height: 10.0,),
                     MovieInfo(id: movie.id),
-                    Characters(id: movie.id),
+                    Casts(id: movie.id),
                     SimilarMovies(id: movie.id),
                   ]),
                 ),

@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:movieApp/bloc/get_characters_bloc.dart';
-import 'package:movieApp/model/character.dart';
-import 'package:movieApp/model/character_response.dart';
+import 'package:movieApp/bloc/get_casts_bloc.dart';
+import 'package:movieApp/model/cast.dart';
+import 'package:movieApp/model/cast_response.dart';
 import 'package:movieApp/style/theme.dart' as Style;
 
-class Characters extends StatefulWidget {
+class Casts extends StatefulWidget {
   final int id;
-  Characters({Key key, @required this.id}) : super(key : key);
+  Casts({Key key, @required this.id}) : super(key : key);
   @override
-  _CharactersState createState() => _CharactersState(id);
+  _CastsState createState() => _CastsState(id);
 }
 
-class _CharactersState extends State<Characters> {
+class _CastsState extends State<Casts> {
   final int id;
-  _CharactersState(this.id);
+  _CastsState(this.id);
 
   @override
   void initState() {
     super.initState();
-    charactersBloc..getCharacters(id);
+    castsBloc..getCasts(id);
   }
 
   @override
   void dispose() {
     super.dispose();
-    charactersBloc..drainStream();
+    castsBloc..drainStream();
   }
   @override
   Widget build(BuildContext context) {
@@ -43,14 +43,14 @@ class _CharactersState extends State<Characters> {
           ),
         ),
         SizedBox(height: 5.0,),
-        StreamBuilder<CharacterResponse>(
-        stream: charactersBloc.subject.stream,
-        builder: (context, AsyncSnapshot<CharacterResponse> snapshot) {
+        StreamBuilder<CastResponse>(
+        stream: castsBloc.subject.stream,
+        builder: (context, AsyncSnapshot<CastResponse> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data.error != null && snapshot.data.error.length > 0) {
               return _buildErrorWidget(snapshot.data.error);
             }
-            return _buildCharactersWidget(snapshot.data);
+            return _buildCastsWidget(snapshot.data);
           } else if (snapshot.hasError) {
             return _buildErrorWidget(snapshot.error);
           } else {
@@ -90,14 +90,14 @@ class _CharactersState extends State<Characters> {
     );
   }
 
-  Widget _buildCharactersWidget(CharacterResponse data) {
-    List<Character> characters = data.characters;
+  Widget _buildCastsWidget(CastResponse data) {
+    List<Cast> casts = data.casts;
     return Container(
       height: 140.0,
       padding: EdgeInsets.only(left: 10.0),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: characters.length,
+        itemCount: casts.length,
         itemBuilder: (context, index) {
           return Container(
             padding: EdgeInsets.only(top: 10.0, right: 8.0),
@@ -115,14 +115,14 @@ class _CharactersState extends State<Characters> {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: NetworkImage(
-                          "https://image.tmdb.org/t/p/w300/" + characters[index].profileImg
+                          "https://image.tmdb.org/t/p/w300/" + casts[index].profileImg,
                         ),
                       ),
                     ),
                   ),
                   SizedBox(height: 10.0,),
                   Text(
-                    characters[index].name,
+                    casts[index].name,
                     maxLines: 2,
                     style: TextStyle(
                       height: 1.4,
@@ -133,7 +133,7 @@ class _CharactersState extends State<Characters> {
                   ),
                   SizedBox(height: 10.0,),
                   Text(
-                    characters[index].character,
+                    casts[index].cast,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Style.Colors.titleColor,

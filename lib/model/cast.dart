@@ -1,19 +1,19 @@
-class Character {
+class Cast {
   final int id;
-  final String character;
+  final String cast;
   final String name;
   final String profileImg;
 
-  Character(
+  Cast(
     this.id,
-    this.character,
+    this.cast,
     this.name,
     this.profileImg
   );
 
-  Character.fromJson(Map<String, dynamic> json)
+  Cast.fromJson(Map<String, dynamic> json)
   : id = json["cast_id"],
-    character = json["character"],
+    cast = json["character"],
     name = json["name"],
     profileImg = json["profile_path"];
 
