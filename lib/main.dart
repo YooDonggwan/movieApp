@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:movieApp/tab1_movielist/screen/movie_list.dart';
 import 'package:movieApp/tab2_mylist/my_list.dart';
@@ -25,6 +26,31 @@ class MovieApp extends StatefulWidget {
 }
 
 class _MainScreen extends State<MovieApp> {
+
+  // firesbase initialize
+  bool _initialized = false;
+  bool _error = false;
+
+  void initializeFlutterFire() async {
+    try {
+      await Firebase.initializeApp();
+      setState(() {
+        _initialized = true;
+      });
+    } catch(e) {
+      setState(() {
+        _error = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    initializeFlutterFire();
+    super.initState();
+  }
+
+  ////// Widget
   var _index = 0;
   var _tabs = [
     MovieList(),
@@ -34,18 +60,16 @@ class _MainScreen extends State<MovieApp> {
 
   @override
   Widget build(BuildContext context) {
+
+    if(_error){
+      return Text('error!!');
+    }
+
+    if(!_initialized){
+      return Text('Loading');
+    }
+    
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.blueGrey,
-      //   title: Text(
-      //     'M o v i a r y',
-      //     style: TextStyle(
-      //       color: Colors.white,
-      //       fontWeight: FontWeight.bold,
-      //     ),
-      //   ),
-      //   centerTitle: true,
-      // ),
       body: _tabs[_index],
       backgroundColor: Colors.blueGrey[700],
       bottomNavigationBar: BottomNavigationBar(

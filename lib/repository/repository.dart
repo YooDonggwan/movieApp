@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:movieApp/model/cast.dart';
 import 'package:movieApp/model/cast_response.dart';
+import 'package:movieApp/model/movie.dart';
 import 'package:movieApp/model/movie_detail_response.dart';
 import 'package:movieApp/model/movie_response.dart';
 import 'package:movieApp/model/genre_response.dart';
@@ -8,8 +10,11 @@ import 'package:movieApp/model/person_response.dart';
 import 'package:movieApp/model/produc_country_response.dart';
 import 'package:movieApp/model/search_result_response.dart';
 import 'package:movieApp/model/teaser_response.dart';
+import 'package:movieApp/provider/firestore_provider.dart';
 
 class MovieRepository {
+  
+  ///////////// TMDB API ///////////////////////
   final String apiKey = "069b7dd19fcd41e43c5fa72e49ded1f5";
   static String mainUrl = "https://api.themoviedb.org/3";
   final Dio _dio = Dio();
@@ -36,7 +41,6 @@ class MovieRepository {
       return MovieResponse.withError("$error");
     }
   }
-
 
   Future<MovieResponse> getPlayingMovies() async {
     var params = {
@@ -199,5 +203,16 @@ class MovieRepository {
       print("Exception occured: $error stackTrace: $stacktrace");
       return SearchResultResponse.withError("$error");
     }
+  }
+
+  /////////////// Cloud Firestore 
+  final _firestoreProvider = FirestoreProvider();
+  
+  Future<void> getUploadSeenMovie(Movie seenMovie) async {
+    return _firestoreProvider.uploadSeenMovie(seenMovie);
+  }
+
+  Stream<QuerySnapshot> getSeenMovieList() {
+    return _firestoreProvider.seenMovieList();
   }
 }

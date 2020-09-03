@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -16,6 +17,7 @@ import 'package:movieApp/tab2_mylist/screen/seen_movie_screen.dart';
 import 'package:sliver_fab/sliver_fab.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+
 class MovieDetailScreen extends StatefulWidget {
   final Movie movie;
   MovieDetailScreen({Key key, @required this.movie}) : super(key: key);
@@ -25,6 +27,7 @@ class MovieDetailScreen extends StatefulWidget {
 
 class _MovieDetailScreenState extends State<MovieDetailScreen> {
   final Movie movie;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   _MovieDetailScreenState(this.movie);
 
@@ -57,8 +60,18 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               foregroundColor: Colors.black,
               label: '이미 본 영화 추가',
               child: Icon(Icons.movie_creation),
-              onTap: () {
-
+              onTap: () async {
+                await firestore.collection("seen_movie")
+                  .doc(movie.title)
+                  .set({
+                    'id': movie.id,
+                    'popularity': movie.popularity,
+                    'title': movie.title,
+                    'backdrop_path': movie.backPoster,
+                    'poster_path': movie.poster,
+                    'overview': movie.overview,
+                    'vote_average': movie.rating
+                  });
               },
             ),
             SpeedDialChild(

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "73685743177",
+    "firebase_url": "https://fluttermoviary-7dfdf.firebaseio.com",
+    "project_id": "fluttermoviary-7dfdf",
+    "storage_bucket": "fluttermoviary-7dfdf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73685743177:android:2872cb908966a0509fb198",
+        "android_client_info": {
+          "package_name": "com.example.movieApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73685743177-phq4f35s83o130blan1uhal8jh95dski.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpxOJnPqnB96apXie8qneEB0yEajLZ3Tw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73685743177-phq4f35s83o130blan1uhal8jh95dski.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

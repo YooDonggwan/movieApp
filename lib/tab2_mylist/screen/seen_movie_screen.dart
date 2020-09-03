@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:movieApp/model/movie.dart';
@@ -14,9 +15,9 @@ class SeenMovieScreen extends StatefulWidget {
 class _SeenMovieScreenState extends State<SeenMovieScreen> {
   final List<Movie> seenMovieList = [];
   
-  set setSeenMovie(Movie seenMovie) {
-    seenMovieList.add(seenMovie);
-  }
+  // set setSeenMovie(Movie seenMovie) {
+  //   seenMovieList.add(seenMovie);
+  // }
 
   // @override
   // void initState() {
