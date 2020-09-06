@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Movie {
   final int id;
   final double popularity;
@@ -25,4 +27,5 @@ class Movie {
     poster = json["poster_path"],
     overview = json["overview"],
     rating = json["vote_average"].toDouble();
+
 }

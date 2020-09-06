@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:movieApp/bloc/get_firestore_seenMovies_bloc.dart';
 import 'package:movieApp/model/movie.dart';
 import 'package:movieApp/style/theme.dart' as Style;
 import 'package:movieApp/tab1_movielist/screen/detail_screen.dart';
@@ -13,17 +14,22 @@ class SeenMovieScreen extends StatefulWidget {
 }
 
 class _SeenMovieScreenState extends State<SeenMovieScreen> {
-  final List<Movie> seenMovieList = [];
+  final List<dynamic> seenMovieList = firestoreSeenMovieBloc.getSeenMovieList();
   
   // set setSeenMovie(Movie seenMovie) {
   //   seenMovieList.add(seenMovie);
   // }
 
-  // @override
-  // void initState() {
-  //   super.initState();
+  @override
+  void initState() {
+    super.initState();
+    firestoreSeenMovieBloc..getSeenMovieList();
+  }
 
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

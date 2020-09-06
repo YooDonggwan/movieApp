@@ -62,15 +62,15 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               child: Icon(Icons.movie_creation),
               onTap: () async {
                 await firestore.collection("seen_movie")
-                  .doc("12")
+                  .doc(movie.title)
                   .set({
-                    'id': 123,
-                    'popularity': 123,
-                    'title': 123,
-                    'backdrop_path': 123,
-                    'poster_path': 123,
-                    'overview': 123,
-                    'vote_average': 123
+                    'id': movie.id,
+                    'popularity': movie.popularity,
+                    'title': movie.title,
+                    'backdrop_path': movie.backPoster,
+                    'poster_path': movie.poster,
+                    'overview': movie.overview,
+                    'vote_average': movie.rating
                   });
               },
             ),

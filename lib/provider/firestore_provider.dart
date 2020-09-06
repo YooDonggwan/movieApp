@@ -1,12 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:movieApp/model/movie.dart';
 
 class FirestoreProvider {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // 이미 본 영화 리스트 Firestore에서 가져오기
-  Stream<QuerySnapshot> seenMovieList() {
-    return _firestore.collection("seen_movie").snapshots();
+  Future<List<dynamic>> getSeenMovieList() async {
+    var querySnap = await _firestore
+      .collection('seen_movie')
+      .get();
+
+    var tmplist = querySnap.docs;
+
+    var list = tmplist.map((DocumentSnapshot docSnapshot) {
+      return docSnapshot.data;
+    }).toList();
+
+    return list;
   }
 
   // Firestore의 seenMovie에 추가하기
