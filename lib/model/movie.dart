@@ -28,4 +28,13 @@ class Movie {
     overview = json["overview"],
     rating = json["vote_average"].toDouble();
 
+  Movie.fromSnapshot(DocumentSnapshot snapshot)
+  : id = snapshot.data()["id"],
+    popularity = snapshot.data()["popularity"],
+    title = snapshot.data()["title"],
+    backPoster = snapshot.data()["backdrop_path"],
+    poster = snapshot.data()["poster_path"],
+    overview = snapshot.data()["overview"],
+    rating = snapshot.data()["vote_average"].toDouble();
+
 }

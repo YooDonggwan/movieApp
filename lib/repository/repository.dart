@@ -212,7 +212,7 @@ class MovieRepository {
     return _firestoreProvider.uploadSeenMovie(seenMovie);
   }
 
-  Future<List<dynamic>> getSeenMovieList() {
+  Future<MovieResponse> getSeenMovieList() {
     return _firestoreProvider.getSeenMovieList();
   }
 }
