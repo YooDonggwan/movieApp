@@ -10,7 +10,6 @@ import 'package:movieApp/model/person_response.dart';
 import 'package:movieApp/model/produc_country_response.dart';
 import 'package:movieApp/model/search_result_response.dart';
 import 'package:movieApp/model/teaser_response.dart';
-import 'package:movieApp/provider/firestore_provider.dart';
 
 class MovieRepository {
   
@@ -206,13 +205,37 @@ class MovieRepository {
   }
 
   /////////////// Cloud Firestore 
-  final _firestoreProvider = FirestoreProvider();
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
   
-  Future<void> getUploadSeenMovie(Movie seenMovie) async {
-    return _firestoreProvider.uploadSeenMovie(seenMovie);
+  Future<void> uploadSeenMovie(Movie seenMovie) async {
+    return _firestore
+        .collection("seen_movie")
+        .doc(seenMovie.title)
+        .set({
+          'id':seenMovie.id,
+          'popularity':seenMovie.popularity,
+          'title':seenMovie.title,
+          'backdrop_path':seenMovie.backPoster,
+          'poster_path':seenMovie.poster,
+          'overview':seenMovie.overview,
+          'vote_average':seenMovie.rating
+        });
   }
 
-  Future<MovieResponse> getSeenMovieList() {
-    return _firestoreProvider.getSeenMovieList();
+  Future<MovieResponse> getSeenMovieList() async{
+    try{
+      await _firestore
+        .collection("seen_movie")
+        .get()
+        .then((snapshot) {
+          // snapshot은 QuerySnapshot 이므로 documentSnapsnot으로 바꿔줘야함
+          List<DocumentSnapshot> doclist = snapshot.docs;
+          return MovieResponse.fromSnapshot(doclist);
+        });
+    } catch (e) {
+      print(e);
+      return MovieResponse.withError("$e");
+    }
+     
   }
 }

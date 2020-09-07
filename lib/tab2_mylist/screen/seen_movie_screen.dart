@@ -14,11 +14,7 @@ class SeenMovieScreen extends StatefulWidget {
 }
 
 class _SeenMovieScreenState extends State<SeenMovieScreen> {
-  final List<dynamic> seenMovieList = firestoreSeenMovieBloc.getSeenMovieList();
-  
-  // set setSeenMovie(Movie seenMovie) {
-  //   seenMovieList.add(seenMovie);
-  // }
+  final List<Movie> seenMovieList = firestoreSeenMovieBloc.getSeenMovieList();
 
   @override
   void initState() {

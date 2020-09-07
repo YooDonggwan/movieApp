@@ -1,12 +1,13 @@
+import 'package:movieApp/model/movie_response.dart';
 import 'package:movieApp/repository/repository.dart';
 import 'package:rxdart/subjects.dart';
 
 class FirestoreSeenMovieBloc {
   final MovieRepository _repository = MovieRepository();
-  final BehaviorSubject<List> _subject = BehaviorSubject<List>();
+  final BehaviorSubject<MovieResponse> _subject = BehaviorSubject<MovieResponse>();
 
   getSeenMovieList() async {
-    List<dynamic> response = await _repository.getSeenMovieList();
+    MovieResponse response = await _repository.getSeenMovieList();
     _subject.sink.add(response);
   }
 
@@ -14,7 +15,7 @@ class FirestoreSeenMovieBloc {
     _subject.close();
   }
 
-  BehaviorSubject<List> get subject => _subject;
+  BehaviorSubject<MovieResponse> get subject => _subject;
 }
 
 final firestoreSeenMovieBloc = FirestoreSeenMovieBloc();

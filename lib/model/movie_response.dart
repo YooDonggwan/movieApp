@@ -14,10 +14,10 @@ class MovieResponse {
       firestoreMovie = List(),
       error = "";
 
-  MovieResponse.fromSnapshot(DocumentSnapshot snapshot)
+  MovieResponse.fromSnapshot(List<DocumentSnapshot> snapshot)
     : movies = List(),
       // firestoreMovie = Movie.fromSnapshot(snapshot),
-      firestoreMovie = (snapshot as List).map((i) => new Movie.fromSnapshot(snapshot)).toList(),
+      firestoreMovie = snapshot.map((i) => new Movie.fromSnapshot(i)).toList(),
       error = "";
 
   MovieResponse.withError(String errorValue)

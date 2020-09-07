@@ -28,25 +28,25 @@ class MovieApp extends StatefulWidget {
 class _MainScreen extends State<MovieApp> {
 
   // firesbase initialize
-  bool _initialized = false;
-  bool _error = false;
+  // bool _initialized = false;
+  // bool _error = false;
 
-  void initializeFlutterFire() async {
-    try {
-      await Firebase.initializeApp();
-      setState(() {
-        _initialized = true;
-      });
-    } catch(e) {
-      setState(() {
-        _error = true;
-      });
-    }
-  }
+  // void initializeFlutterFire() async {
+  //   try {
+  //     await Firebase.initializeApp();
+  //     setState(() {
+  //       _initialized = true;
+  //     });
+  //   } catch(e) {
+  //     setState(() {
+  //       _error = true;
+  //     });
+  //   }
+  // }
 
   @override
   void initState() {
-    initializeFlutterFire();
+    // initializeFlutterFire();
     super.initState();
   }
 
@@ -61,13 +61,13 @@ class _MainScreen extends State<MovieApp> {
   @override
   Widget build(BuildContext context) {
 
-    if(_error){
-      return Text('error!!');
-    }
+    // if(_error){
+    //   return Text('error!!');
+    // }
 
-    if(!_initialized){
-      return Text('Loading');
-    }
+    // if(!_initialized){
+    //   return Text('Loading');
+    // }
     
     return Scaffold(
       body: _tabs[_index],
