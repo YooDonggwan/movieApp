@@ -208,7 +208,7 @@ class MovieRepository {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   
   Future<void> uploadSeenMovie(Movie seenMovie) async {
-    return _firestore
+    return await _firestore
         .collection("seen_movie")
         .doc(seenMovie.title)
         .set({
@@ -223,15 +223,19 @@ class MovieRepository {
   }
 
   Future<MovieResponse> getSeenMovieList() async{
+    List<DocumentSnapshot> doclist;
     try{
-      await _firestore
-        .collection("seen_movie")
-        .get()
-        .then((snapshot) {
-          // snapshot은 QuerySnapshot 이므로 documentSnapsnot으로 바꿔줘야함
-          List<DocumentSnapshot> doclist = snapshot.docs;
-          return MovieResponse.fromSnapshot(doclist);
-        });
+      // await _firestore
+      //   .collection("seen_movie")
+      //   .get()
+      //   .then((snapshot) {
+      //     // snapshot은 QuerySnapshot 이므로 documentSnapsnot으로 바꿔줘야함
+      //     doclist = snapshot.docs;
+      //   });
+      // return MovieResponse.fromSnapshot(doclist);
+      var documents = await _firestore.collection("seen_movie").get();
+      doclist = documents.docs;
+      return MovieResponse.fromSnapshot(doclist);
     } catch (e) {
       print(e);
       return MovieResponse.withError("$e");

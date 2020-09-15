@@ -3,6 +3,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:movieApp/bloc/get_firestore_seenMovies_bloc.dart';
 import 'package:movieApp/model/movie.dart';
+import 'package:movieApp/model/movie_response.dart';
 import 'package:movieApp/style/theme.dart' as Style;
 import 'package:movieApp/tab1_movielist/screen/detail_screen.dart';
 import 'package:movieApp/tab2_mylist/widget/movie_feed.dart';
@@ -14,8 +15,8 @@ class SeenMovieScreen extends StatefulWidget {
 }
 
 class _SeenMovieScreenState extends State<SeenMovieScreen> {
-  final List<Movie> seenMovieList = firestoreSeenMovieBloc.getSeenMovieList();
-
+  // final List<Movie> seenMovieList = firestoreSeenMovieBloc.getSeenMovieList();
+  // final List<Movie> seenMovieList = [];
   @override
   void initState() {
     super.initState();
@@ -29,6 +30,53 @@ class _SeenMovieScreenState extends State<SeenMovieScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return StreamBuilder<MovieResponse>(
+        stream: firestoreSeenMovieBloc.subject.stream,
+        builder: (context, AsyncSnapshot<MovieResponse> snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data.error != null && snapshot.data.error.length > 0) {
+              return _buildErrorWidget(snapshot.data.error);
+            }
+            return _buildSeenMovieScreenWidget(snapshot.data);
+          } else if (snapshot.hasError) {
+            return _buildErrorWidget(snapshot.error);
+          } else {
+            return _buildLoadingWidget();
+          }
+        });
+  }
+
+  Widget _buildLoadingWidget() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+            height: 25.0,
+            width: 25.0,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              strokeWidth: 4.0,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildErrorWidget(String error) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text("Error occured: $error"),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSeenMovieScreenWidget(MovieResponse data) {
+    List<Movie> seenMovieList = data.firestoreMovie;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
