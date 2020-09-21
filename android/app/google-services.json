@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "95782811662",
-    "firebase_url": "https://moviaryflutter.firebaseio.com",
-    "project_id": "moviaryflutter",
-    "storage_bucket": "moviaryflutter.appspot.com"
+    "project_number": "76530827032",
+    "firebase_url": "https://moviary-flutter.firebaseio.com",
+    "project_id": "moviary-flutter",
+    "storage_bucket": "moviary-flutter.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:95782811662:android:fce48f284b94d16972e45f",
+        "mobilesdk_app_id": "1:76530827032:android:623bf89cb9fa57596d286d",
         "android_client_info": {
           "package_name": "com.example.movieApp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "95782811662-qi4bsjslja8ddi3m67b31o3bnkp07i60.apps.googleusercontent.com",
+          "client_id": "76530827032-9l1ipmgscraphnp0a9ica5jer34j4of3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBOQHysXrpFqmkXroRzuB5q44xj7XdjBAE"
+          "current_key": "AIzaSyCOnTqNz-1jcuWLsm_lOLs6noTW25W2E0o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "95782811662-qi4bsjslja8ddi3m67b31o3bnkp07i60.apps.googleusercontent.com",
+              "client_id": "76530827032-9l1ipmgscraphnp0a9ica5jer34j4of3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
