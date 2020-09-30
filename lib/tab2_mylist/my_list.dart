@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movieApp/tab2_mylist/screen/masterpiece_movie_screen.dart';
 import 'package:movieApp/tab2_mylist/screen/seen_movie_screen.dart';
+import 'package:movieApp/tab2_mylist/screen/wish_movie_screen.dart';
 import 'screen/movie_note_screen.dart';
 import 'package:movieApp/style/theme.dart' as Style;
 // 3개의 메뉴
@@ -62,6 +64,12 @@ class _MyListState extends State<MyList> {
                     fontSize: 20,
                   ),
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder: (context) => WishMovieScreen()),
+                  );
+                },
               ),
             ),
             SizedBox(height: 10.0,),
@@ -75,6 +83,12 @@ class _MyListState extends State<MyList> {
                     fontSize: 20,
                   ),
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MasterpieceScreen()),
+                  );
+                },
               ),
             ),
             SizedBox(height: 10.0,),

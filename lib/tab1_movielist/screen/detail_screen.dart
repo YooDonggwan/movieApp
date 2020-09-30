@@ -15,6 +15,7 @@ import 'package:movieApp/tab1_movielist/widgets/movie_info.dart';
 import 'package:movieApp/tab1_movielist/widgets/similar_movies.dart';
 import 'package:movieApp/tab2_mylist/screen/seen_movie_screen.dart';
 import 'package:sliver_fab/sliver_fab.dart';
+import 'package:unicorndial/unicorndial.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 
@@ -45,56 +46,68 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var childButtons = List<UnicornButton>();
+
+    childButtons.add(UnicornButton(
+      hasLabel: true,
+      labelText: "이미 본 영화 추가",
+      currentButton: FloatingActionButton(
+        heroTag: "본 영화",
+        backgroundColor: Colors.redAccent,
+        mini: true,
+        child: Icon(Icons.movie_creation),
+        onPressed: () {
+          firestore.collection('SeenMovie')
+            .doc(movie.title)
+            .set({
+              'id' : movie.id,
+              'popularity': movie.popularity,
+              'title': movie.title,
+              'backdrop_path': movie.backPoster,
+              'poster_path': movie.poster,
+              'overview': movie.overview,
+              'vote_average': movie.rating
+            });
+        },
+      ),
+    ));
+
+    childButtons.add(UnicornButton(
+      hasLabel: true,
+      labelText: "보고싶은 영화 추가",
+      currentButton: FloatingActionButton(
+        heroTag: "볼 영화",
+        backgroundColor: Colors.greenAccent,
+        mini: true,
+        child: Icon(Icons.movie_filter),
+        onPressed: () {
+
+        },
+      ),
+    ));
+
+    childButtons.add(UnicornButton(
+      hasLabel: true,
+      labelText: "명작 보관함 추가",
+      currentButton: FloatingActionButton(
+        heroTag: "명작",
+        backgroundColor: Colors.blueAccent,
+        mini: true,
+        child: Icon(Icons.local_movies),
+        onPressed: () {
+          
+        },
+      ),
+    ));
+
     return Scaffold(
       backgroundColor: Style.Colors.mainColor,
-      floatingActionButton: SizedBox(
-        width: 50.0,
-        height: 50.0,
-        child: SpeedDial(
-          backgroundColor: Colors.yellow,
-          animatedIcon: AnimatedIcons.menu_close,
-          foregroundColor: Colors.black,
-          children: [
-            SpeedDialChild(
-              backgroundColor: Colors.yellow,
-              foregroundColor: Colors.black,
-              label: '이미 본 영화 추가',
-              child: Icon(Icons.movie_creation),
-              onTap: () async {
-                await firestore.collection("seen_movie")
-                  .doc(movie.title)
-                  .set({
-                    'id': movie.id,
-                    'popularity': movie.popularity,
-                    'title': movie.title,
-                    'backdrop_path': movie.backPoster,
-                    'poster_path': movie.poster,
-                    'overview': movie.overview,
-                    'vote_average': movie.rating
-                  });
-              },
-            ),
-            SpeedDialChild(
-              backgroundColor: Colors.yellow,
-              foregroundColor: Colors.black,
-              label: '보고싶은 영화 추가',
-              child: Icon(Icons.movie_filter),
-              onTap: () {
-
-              },
-            ),
-            SpeedDialChild(
-              backgroundColor: Colors.yellow,
-              foregroundColor: Colors.black,
-              label: '명작 보관함 추가',
-              child: Icon(Icons.local_movies),
-              onTap: () {
-
-              },
-            ),
-          ],
-        ),
-      ),
+      floatingActionButton: UnicornDialer(
+        backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
+        parentButtonBackground: Colors.redAccent,
+        orientation: UnicornOrientation.VERTICAL,
+        parentButton: Icon(Icons.add),
+        childButtons: childButtons),
       body: Builder(
         builder: (context) {
           return SliverFab(

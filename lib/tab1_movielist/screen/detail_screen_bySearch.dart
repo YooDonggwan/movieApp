@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -12,6 +13,7 @@ import 'package:movieApp/tab1_movielist/widgets/casts.dart';
 import 'package:movieApp/tab1_movielist/widgets/movie_info.dart';
 import 'package:movieApp/tab1_movielist/widgets/similar_movies.dart';
 import 'package:sliver_fab/sliver_fab.dart';
+import 'package:unicorndial/unicorndial.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieDetailScreenBySearch extends StatefulWidget {
@@ -24,6 +26,8 @@ class MovieDetailScreenBySearch extends StatefulWidget {
 
 class _MovieDetailScreenBySearchState extends State<MovieDetailScreenBySearch> {
   final SearchResult movie;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   _MovieDetailScreenBySearchState(this.movie);
 
   @override
@@ -40,6 +44,58 @@ class _MovieDetailScreenBySearchState extends State<MovieDetailScreenBySearch> {
 
   @override
   Widget build(BuildContext context) {
+    var childButtons = List<UnicornButton>();
+
+    childButtons.add(UnicornButton(
+      hasLabel: true,
+      labelText: "이미 본 영화 추가",
+      currentButton: FloatingActionButton(
+        heroTag: "본 영화",
+        backgroundColor: Colors.redAccent,
+        mini: true,
+        child: Icon(Icons.movie_creation),
+        onPressed: () {
+          firestore.collection('SeenMovie')
+            .doc(movie.title)
+            .set({
+              'id' : movie.id,
+              'popularity': movie.popularity,
+              'title': movie.title,
+              'backdrop_path': movie.backPoster,
+              'poster_path': movie.poster,
+              'overview': movie.overview,
+            });
+        },
+      ),
+    ));
+
+    childButtons.add(UnicornButton(
+      hasLabel: true,
+      labelText: "보고싶은 영화 추가",
+      currentButton: FloatingActionButton(
+        heroTag: "볼 영화",
+        backgroundColor: Colors.greenAccent,
+        mini: true,
+        child: Icon(Icons.movie_filter),
+        onPressed: () {
+
+        },
+      ),
+    ));
+
+    childButtons.add(UnicornButton(
+      hasLabel: true,
+      labelText: "명작 보관함 추가",
+      currentButton: FloatingActionButton(
+        heroTag: "명작",
+        backgroundColor: Colors.blueAccent,
+        mini: true,
+        child: Icon(Icons.local_movies),
+        onPressed: () {
+          
+        },
+      ),
+    ));
     return Scaffold(
       backgroundColor: Style.Colors.mainColor,
       body: Builder(

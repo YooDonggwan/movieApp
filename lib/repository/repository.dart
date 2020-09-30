@@ -233,13 +233,37 @@ class MovieRepository {
       //     doclist = snapshot.docs;
       //   });
       // return MovieResponse.fromSnapshot(doclist);
-      var documents = await _firestore.collection("seen_movie").get();
+      var documents = await _firestore.collection("SeenMovie").get();
       doclist = documents.docs;
       return MovieResponse.fromSnapshot(doclist);
     } catch (e) {
       print(e);
       return MovieResponse.withError("$e");
     }
-     
   }
+
+  Future<MovieResponse> getWishMovieList() async{
+    List<DocumentSnapshot> doclist;
+    try{
+      var documents = await _firestore.collection("WishMovie").get();
+      doclist = documents.docs;
+      return MovieResponse.fromSnapshot(doclist);
+    } catch (e) {
+      print(e);
+      return MovieResponse.withError("$e");
+    }
+  }
+
+  Future<MovieResponse> getMasterpieceList() async{
+    List<DocumentSnapshot> doclist;
+    try{
+      var documents = await _firestore.collection("Masterpiece").get();
+      doclist = documents.docs;
+      return MovieResponse.fromSnapshot(doclist);
+    } catch (e) {
+      print(e);
+      return MovieResponse.withError("$e");
+    }
+  }
+
 }
