@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:movieApp/bloc/get_movie_teasers_bloc.dart';
 import 'package:movieApp/model/movie.dart';
+import 'package:movieApp/tab1_movielist/screen/make_note_screen.dart';
 import 'package:movieApp/tab1_movielist/widgets/casts.dart';
 import 'package:movieApp/model/teaser.dart';
 import 'package:movieApp/model/teaser_response.dart';
@@ -81,7 +82,17 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         mini: true,
         child: Icon(Icons.movie_filter),
         onPressed: () {
-
+          firestore.collection('WishMovie')
+            .doc(movie.title)
+            .set({
+              'id' : movie.id,
+              'popularity': movie.popularity,
+              'title': movie.title,
+              'backdrop_path': movie.backPoster,
+              'poster_path': movie.poster,
+              'overview': movie.overview,
+              'vote_average': movie.rating
+            });
         },
       ),
     ));
@@ -95,7 +106,33 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         mini: true,
         child: Icon(Icons.local_movies),
         onPressed: () {
-          
+          firestore.collection('Masterpiece')
+            .doc(movie.title)
+            .set({
+              'id' : movie.id,
+              'popularity': movie.popularity,
+              'title': movie.title,
+              'backdrop_path': movie.backPoster,
+              'poster_path': movie.poster,
+              'overview': movie.overview,
+              'vote_average': movie.rating
+            });
+        },
+      ),
+    ));
+
+    childButtons.add(UnicornButton(
+      hasLabel: true,
+      labelText: "영화노트 추가",
+      currentButton: FloatingActionButton(
+        heroTag: "영화노트",
+        backgroundColor: Colors.blueAccent,
+        mini: true,
+        child: Icon(Icons.note),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => MakeNoteScreen()
+          ));
         },
       ),
     ));

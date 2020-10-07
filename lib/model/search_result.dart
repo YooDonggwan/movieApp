@@ -5,6 +5,7 @@ class SearchResult {
   final String backPoster;
   final String poster;
   final String overview;
+  final double rating;
 
   SearchResult(
     this.id,
@@ -13,6 +14,7 @@ class SearchResult {
     this.backPoster,
     this.poster,
     this.overview,
+    this.rating
   );
 
   SearchResult.fromJson(Map<String, dynamic> json)
@@ -21,5 +23,6 @@ class SearchResult {
     title = json["title"],
     backPoster = json["backdrop_path"],
     poster = json["poster_path"],
-    overview = json["overview"];
+    overview = json["overview"],
+    rating = json["vote_average"].toDouble();
 }

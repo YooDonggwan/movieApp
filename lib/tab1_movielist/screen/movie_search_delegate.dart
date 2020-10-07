@@ -1,5 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movieApp/bloc/get_search_result_bloc.dart';
 import 'package:movieApp/model/search_result.dart';
 import 'package:movieApp/model/search_result_response.dart';
@@ -203,7 +204,46 @@ class MovieSearchDelegate extends SearchDelegate<SearchResult> {
                           ),
                         ),
                         SizedBox(
+                          height: 5.0,
+                        ),
+                        Container(
                           height: 10.0,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                searchResult[index].rating.toString(),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              RatingBar(
+                                itemSize: 8.0,
+                                initialRating: searchResult[index].rating / 2,
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 5,
+                                itemPadding:
+                                    EdgeInsets.symmetric(horizontal: 2.0),
+                                itemBuilder: (context, _) => Icon(
+                                  EvaIcons.star,
+                                  color: Style.Colors.secondColor,
+                                ),
+                                onRatingUpdate: (rating) {
+                                  print(rating);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5.0,
                         ),
                       ],
                     ),
