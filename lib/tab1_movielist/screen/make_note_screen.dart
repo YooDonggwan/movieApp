@@ -15,6 +15,7 @@ class MakeNoteScreen extends StatefulWidget {
 class _MakeNoteScreenState extends State<MakeNoteScreen> {
   final Movie movie;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final TextEditingController _textController = new TextEditingController();
 
   _MakeNoteScreenState(this.movie);
 
@@ -115,6 +116,8 @@ class _MakeNoteScreenState extends State<MakeNoteScreen> {
               child: Container(
                 color: Style.Colors.titleColor,
                 child: TextField(
+                  controller: _textController,
+                  // onSubmitted: _handleSubmit,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -127,9 +130,37 @@ class _MakeNoteScreenState extends State<MakeNoteScreen> {
             ),
           ),
           // 저장 버튼
-          
+          Container(
+            child:MaterialButton(
+              color: Colors.lightBlue,
+              textColor: Colors.black,
+              onPressed: () {
+                firestore.collection('MovieNote')
+                  .doc(movie.title)
+                  .set({
+                    'poster_path': movie.poster,
+                    'title': movie.title,
+                    'date': date,
+                    'note_content': _textController.text
+                  });
+                Navigator.pop(context);
+                // _handleSubmit(_textController.text);
+              }, 
+              child: Text(
+                '노트에 저장하기',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
+
+  // void _handleSubmit(String text){
+  //    _textController.clear();
+  // }
 }
