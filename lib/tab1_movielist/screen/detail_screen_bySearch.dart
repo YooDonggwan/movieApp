@@ -128,9 +128,10 @@ class _MovieDetailScreenBySearchState extends State<MovieDetailScreenBySearch> {
         mini: true,
         child: Icon(Icons.note),
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context) => MakeNoteScreen()
-          ));
+          // makenotescreen 에서는 파라미터로 Movie를 받는데 여기는 SearchResult를 받으므로 또 하나를 더 만들어야하니까 비효울 - detailScreen과 detailScreenBySearch 꼭 합쳐야함
+          // Navigator.push(context, MaterialPageRoute(
+          //   builder: (context) => MakeNoteScreen()
+          // ));
         },
       ),
     ));

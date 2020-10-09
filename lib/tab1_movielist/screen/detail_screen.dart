@@ -131,7 +131,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         child: Icon(Icons.note),
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(
-            builder: (context) => MakeNoteScreen()
+            builder: (context) => MakeNoteScreen(movie: movie)
           ));
         },
       ),
