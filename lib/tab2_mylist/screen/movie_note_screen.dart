@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:movieApp/bloc/get_firestore_movie_note_bloc.dart';
+import 'package:movieApp/model/movie_note.dart';
 import 'package:movieApp/model/movie_note_response.dart';
 import 'package:movieApp/tab2_mylist/widget/movie_feed.dart';
 import 'package:movieApp/style/theme.dart' as Style;
 
-class MovieNote extends StatefulWidget {
+class MovieNoteScreen extends StatefulWidget {
+
   @override
-  _MovieNoteState createState() => _MovieNoteState();
+  _MovieNoteScreenState createState() => _MovieNoteScreenState();
 }
 
 // 영화 노트는 이미 본 영화에서 노트를 추가하면 포스터와 노트 내용이 피드 형식으로 나타나게 하기
 
-class _MovieNoteState extends State<MovieNote> {
+class _MovieNoteScreenState extends State<MovieNoteScreen> {
 
   @override
   void initState() {
@@ -19,23 +21,27 @@ class _MovieNoteState extends State<MovieNote> {
     firestoreMovieNoteBloc..getMovieNote();
   }
 
+  @override 
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<MovieNoteResponse>(
-      stream: firestoreMovieNoteBloc.subject.stream,
-      builder: (context, AsyncSnapshot<MovieNoteResponse> snapshot) {
-        if(snapshot.hasData){
-          if(snapshot.data.error != null && snapshot.data.error.length >0) {
-            return _buildErrorWidget(snapshot.data.error);
+        stream: firestoreMovieNoteBloc.subject.stream,
+        builder: (context, AsyncSnapshot<MovieNoteResponse> snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data.error != null && snapshot.data.error.length > 0) {
+              return _buildErrorWidget(snapshot.data.error);
+            }
+            return _buildMovieNoteScreenWidget(snapshot.data);
+          } else if (snapshot.hasError) {
+            return _buildErrorWidget(snapshot.error);
+          } else {
+            return _buildLoadingWidget();
           }
-          return _buildMovieNoteScreenWidget(snapshot.data);
-        } else if (snapshot.hasError) {
-          return _buildErrorWidget(snapshot.error);
-        } else {
-          return _buildLoadingWidget();
-        }
-      }
-    );
+        });
   }
 
   Widget _buildLoadingWidget() {
@@ -68,6 +74,8 @@ class _MovieNoteState extends State<MovieNote> {
   }
 
   Widget _buildMovieNoteScreenWidget(MovieNoteResponse data) {
+    List<MovieNote> movieNoteList = data.movieNote;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
@@ -85,8 +93,85 @@ class _MovieNoteState extends State<MovieNote> {
       body: Padding(
         padding: EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
         child: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) => MovieFeed(),
+          scrollDirection: Axis.vertical,
+          itemCount: movieNoteList.length,
+          itemBuilder: (context, index) {
+            return Card(
+              child: Container(
+                color: Style.Colors.titleColor,
+                height: 250.0,
+                child: Column(
+                  children: <Widget>[
+                    ListTile(
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.network(
+                          "https://image.tmdb.org/t/p/w200/" +
+                            movieNoteList[index].poster
+                        ),
+                      ),
+                      title: Text(
+                        movieNoteList[index].title,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        movieNoteList[index].date,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      trailing: PopupMenuButton(
+                        icon: Icon(Icons.more_vert),
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                            child: Row(
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.create),
+                                  onPressed: () {},
+                                ),
+                                Text(
+                                  '수정'
+                                ),
+                              ],
+                            ),
+                            
+                          ),
+                          PopupMenuItem(
+                            child: IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () {},
+                            ),
+                          )
+                        ],  
+                      ),
+                    ),
+                    SizedBox(height: 20.0,),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+                        child: Container(
+                          color: Style.Colors.titleColor,
+                          child: Text(
+                            movieNoteList[index].noteContent,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         )
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movieApp/model/movie_note.dart';
 import 'package:movieApp/style/theme.dart' as Style;
-import 'package:movieApp/tab2_mylist/screen/movie_note_screen.dart';
 
 class MovieFeed extends StatefulWidget {
   // movie들을 리스트로 받아서 피드에 하나씩 풀어주면 될듯
@@ -17,6 +17,16 @@ class _MovieFeedState extends State<MovieFeed> {
   _MovieFeedState(this.movieNote);
 
   @override
+  void initState(){
+    super.initState();
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Card(
       child: Container(
@@ -26,16 +36,23 @@ class _MovieFeedState extends State<MovieFeed> {
           children: <Widget>[
             ListTile(
               leading: CircleAvatar(
+                backgroundImage: NetworkImage(
+                  "https://image.tmdb.org/t/p/w200/" +
+                      movieNote.poster
+                ),
+                // backgroundColor: Colors.transparent,
                 radius: 60.0,
                 // backgroundImage: ,
               ),
-              title: Text('어벤져스 : 인피니티 워',
+              title: Text(
+                movieNote.title,
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              subtitle: Text('2020/08/13',
+              subtitle: Text(
+                movieNote.date,
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -50,10 +67,7 @@ class _MovieFeedState extends State<MovieFeed> {
                     style: TextStyle(
                       color: Colors.white,
                     ),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Write your comments about movie'
-                    ),
+                    
                   ),
                 ),
               ),

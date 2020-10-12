@@ -105,7 +105,7 @@ class _MyListState extends State<MyList> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MovieNote()),
+                    MaterialPageRoute(builder: (context) => MovieNoteScreen()),
                   );
                 },
               ),

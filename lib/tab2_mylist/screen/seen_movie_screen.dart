@@ -6,7 +6,6 @@ import 'package:movieApp/model/movie.dart';
 import 'package:movieApp/model/movie_response.dart';
 import 'package:movieApp/style/theme.dart' as Style;
 import 'package:movieApp/tab1_movielist/screen/detail_screen.dart';
-import 'package:movieApp/tab2_mylist/screen/movie_feed.dart';
 
 class SeenMovieScreen extends StatefulWidget {
   SeenMovieScreen({Key key}) : super(key : key);

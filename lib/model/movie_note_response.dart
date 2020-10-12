@@ -11,7 +11,7 @@ class MovieNoteResponse {
   );
 
   MovieNoteResponse.fromSnapshot(List<DocumentSnapshot> snapshot)
-  : movieNote = snapshot.map((i) => new MovieNote.fromSnapshot(i)),
+  : movieNote = snapshot.map((i) => new MovieNote.fromSnapshot(i)).toList(),
     error = "";
 
   MovieNoteResponse.withError(String errorValue)
