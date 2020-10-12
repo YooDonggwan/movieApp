@@ -4,6 +4,7 @@ import 'package:movieApp/model/cast.dart';
 import 'package:movieApp/model/cast_response.dart';
 import 'package:movieApp/model/movie.dart';
 import 'package:movieApp/model/movie_detail_response.dart';
+import 'package:movieApp/model/movie_note_response.dart';
 import 'package:movieApp/model/movie_response.dart';
 import 'package:movieApp/model/genre_response.dart';
 import 'package:movieApp/model/person_response.dart';
@@ -263,6 +264,18 @@ class MovieRepository {
     } catch (e) {
       print(e);
       return MovieResponse.withError("$e");
+    }
+  }
+
+  Future<MovieNoteResponse> getMovieNote() async {
+    List<DocumentSnapshot> docSnapshot;
+    try{
+      var document = await _firestore.collection("MovieNote").get();
+      docSnapshot = document.docs;
+      return MovieNoteResponse.fromSnapshot(docSnapshot);
+    } catch(e) {
+      print(e);
+      return MovieNoteResponse.withError("$e");
     }
   }
 

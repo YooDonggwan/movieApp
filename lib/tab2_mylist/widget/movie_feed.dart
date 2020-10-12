@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:movieApp/style/theme.dart' as Style;
+import 'package:movieApp/tab2_mylist/screen/movie_note_screen.dart';
 
 class MovieFeed extends StatefulWidget {
-
   // movie들을 리스트로 받아서 피드에 하나씩 풀어주면 될듯
+  final MovieNote movieNote;
+
+  MovieFeed({Key key, @required this.movieNote}) : super(key : key);
 
   @override
-  _MovieFeedState createState() => _MovieFeedState();
+  _MovieFeedState createState() => _MovieFeedState(movieNote);
 }
 
 class _MovieFeedState extends State<MovieFeed> {
+  final MovieNote movieNote;
+  _MovieFeedState(this.movieNote);
+
   @override
   Widget build(BuildContext context) {
     return Card(
