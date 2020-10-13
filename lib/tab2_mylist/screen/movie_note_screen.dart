@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:movieApp/bloc/get_firestore_movie_note_bloc.dart';
 import 'package:movieApp/model/movie_note.dart';
@@ -14,6 +15,9 @@ class MovieNoteScreen extends StatefulWidget {
 // 영화 노트는 이미 본 영화에서 노트를 추가하면 포스터와 노트 내용이 피드 형식으로 나타나게 하기
 
 class _MovieNoteScreenState extends State<MovieNoteScreen> {
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final TextEditingController _textController = TextEditingController();
 
   @override
   void initState() {
@@ -127,23 +131,96 @@ class _MovieNoteScreenState extends State<MovieNoteScreen> {
                         icon: Icon(Icons.more_vert),
                         itemBuilder: (context) => [
                           PopupMenuItem(
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.create),
-                                  onPressed: () {},
-                                ),
-                                Text(
-                                  '수정'
-                                ),
-                              ],
+                            child: FlatButton.icon(
+                              icon: Icon(Icons.create),
+                              label: Text('수정'),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: Text(
+                                      '수정할 내용을 입력해주세요',
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                    content: TextField(
+                                      controller: _textController,
+                                      style: TextStyle(
+                                        color: Colors.black
+                                      ),
+                                      decoration: InputDecoration(
+                                        hintText: '내용을 입력해주세요'
+                                      ),
+                                    ),
+                                    actions: [
+                                      Row(
+                                        children: [
+                                          FlatButton(
+                                            child: Text('완료'),
+                                            onPressed: () {
+                                              _firestore.collection("MovieNote")
+                                                .doc(movieNoteList[index].title)
+                                                .update({
+                                                  'note_content': _textController.text
+                                                });
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                          FlatButton(
+                                            child: Text('취소'),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
                             ),
-                            
                           ),
                           PopupMenuItem(
-                            child: IconButton(
-                              icon: Icon(Icons.delete),
-                              onPressed: () {},
+                            child: FlatButton.icon(
+                              icon: Icon(Icons.create),
+                              label: Text('삭제'),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: Text(
+                                      '삭제하시겠습니까?',
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                    actions: [
+                                      Row(
+                                        children: [
+                                          FlatButton(
+                                            child: Text('삭제'),
+                                            onPressed: () {
+                                              _firestore.collection("MovieNote")
+                                                .doc(movieNoteList[index].title)
+                                                .delete();
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                          FlatButton(
+                                            child: Text('취소'),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
                             ),
                           )
                         ],  

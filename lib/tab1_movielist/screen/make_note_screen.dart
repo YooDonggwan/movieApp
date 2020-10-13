@@ -123,7 +123,7 @@ class _MakeNoteScreenState extends State<MakeNoteScreen> {
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'Write your comments about movie'
+                    hintText: '영화를 보고 노트에 내용을 입력해주세요'
                   ),
                 ),
               ),
