@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movieApp/bloc/get_firestore_movie_note_bloc.dart';
 import 'package:movieApp/model/movie_note.dart';
 import 'package:movieApp/model/movie_note_response.dart';
+import 'package:movieApp/tab2_mylist/screen/modify_movie_note_screen.dart';
 import 'package:movieApp/tab2_mylist/widget/movie_feed.dart';
 import 'package:movieApp/style/theme.dart' as Style;
 
@@ -135,57 +136,17 @@ class _MovieNoteScreenState extends State<MovieNoteScreen> {
                               icon: Icon(Icons.create),
                               label: Text('수정'),
                               onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    title: Text(
-                                      '수정할 내용을 입력해주세요',
-                                      style: TextStyle(
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                    content: TextField(
-                                      controller: _textController,
-                                      style: TextStyle(
-                                        color: Colors.black
-                                      ),
-                                      decoration: InputDecoration(
-                                        hintText: '내용을 입력해주세요'
-                                      ),
-                                    ),
-                                    actions: [
-                                      Row(
-                                        children: [
-                                          FlatButton(
-                                            child: Text('완료'),
-                                            onPressed: () {
-                                              _firestore.collection("MovieNote")
-                                                .doc(movieNoteList[index].title)
-                                                .update({
-                                                  'note_content': _textController.text
-                                                });
-                                              setState((){});
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                          FlatButton(
-                                            child: Text('취소'),
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                );
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => ModifyMovieNoteScreen(movieNoteList[index])
+                                )).then((value) => setState(() {
+                                  firestoreMovieNoteBloc..getMovieNote();
+                                }));
                               },
                             ),
                           ),
                           PopupMenuItem(
                             child: FlatButton.icon(
-                              icon: Icon(Icons.create),
+                              icon: Icon(Icons.delete),
                               label: Text('삭제'),
                               onPressed: () {
                                 showDialog(
@@ -207,6 +168,9 @@ class _MovieNoteScreenState extends State<MovieNoteScreen> {
                                               _firestore.collection("MovieNote")
                                                 .doc(movieNoteList[index].title)
                                                 .delete();
+                                              setState(() {
+                                                firestoreMovieNoteBloc..getMovieNote();
+                                              });
                                               Navigator.pop(context);
                                             },
                                           ),
