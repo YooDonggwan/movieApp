@@ -165,6 +165,7 @@ class _MovieNoteScreenState extends State<MovieNoteScreen> {
                                                 .update({
                                                   'note_content': _textController.text
                                                 });
+                                              setState((){});
                                               Navigator.pop(context);
                                             },
                                           ),
