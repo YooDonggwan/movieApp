@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:movieApp/tab1_movielist/screen/login_screen.dart';
 import 'package:movieApp/tab1_movielist/screen/movie_list.dart';
 import 'package:movieApp/tab2_mylist/my_list.dart';
 import 'package:movieApp/tab3_profile/profile.dart';
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Moviary',
-      home: MovieApp(),
+      // home: MovieApp(),
+      home: LoginScreen()
     );
   }
 }

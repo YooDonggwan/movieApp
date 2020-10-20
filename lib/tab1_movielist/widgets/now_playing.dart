@@ -142,13 +142,23 @@ class _NowPlayingState extends State<NowPlaying> {
                               stops: [0.0, 0.9]),
                         ),
                       ),
-                      Positioned(
-                        top: 0,
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        child: Icon(FontAwesomeIcons.playCircle, color: Style.Colors.secondColor, size: 40.0,),
-                      ),
+                      // Positioned(
+                      //   top: 0,
+                      //   bottom: 0,
+                      //   right: 0,
+                      //   left: 0,
+                        
+                      //   child: GestureDetector(
+                      //     onTap: () {
+
+                      //     },
+                      //     child: Icon(
+                      //       FontAwesomeIcons.playCircle, 
+                      //       color: Style.Colors.secondColor, 
+                      //       size: 40.0,
+                      //     ),
+                      //   ),
+                      // ),
                       Positioned(
                         bottom: 30.0,
                         child: Container(
