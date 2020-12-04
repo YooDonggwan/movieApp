@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:movieApp/main.dart';
+import 'package:movieApp/extra_screen/main_screen.dart';
 import 'package:movieApp/style/theme.dart' as Style;
 
 class LoginScreen extends StatefulWidget {
@@ -21,10 +22,10 @@ class _LoginScreenState extends State<LoginScreen> {
     print('Name: ${data.name}, Password: ${data.password}');
     return Future.delayed(loginTime).then((_) {
       if (!users.containsKey(data.name)) {
-        return 'Username not exists';
+        return '아이디가 존재하지 않습니다';
       }
       if (users[data.name] != data.password) {
-        return 'Password does not match';
+        return '비밀번호가 일치하지 않습니다';
       }
       return null;
     });
@@ -34,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
     print('Name: $name');
     return Future.delayed(loginTime).then((_) {
       if (!users.containsKey(name)) {
-        return 'Username not exists';
+        return '아이디가 존재하지 않습니다';
       }
       return null;
     });
@@ -66,9 +67,21 @@ class _LoginScreenState extends State<LoginScreen> {
         recoverPasswordIntro: '비밀번호를 재설정해주세요',
         recoverPasswordSuccess: '이메일로 비밀번호를 전송했습니다.'
       ),
+      // emailValidator: (value) {
+      //   if (value.isEmpty || !Regex.email.hasMatch(value)) {
+      //     return '유효하지않은 이메일입니다!';
+      //   }
+      //   return null;
+      // },
+      // passwordValidator: (value) {
+      //   if (value.isEmpty || value.length <= 2) {
+      //     return '비밀번호가 너무 짧습니다!';
+      //   }
+      //   return null;
+      // },
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => MovieApp(),
+          builder: (context) => MainScreen(),
         ));
       },
       onRecoverPassword: _recoverPassword,

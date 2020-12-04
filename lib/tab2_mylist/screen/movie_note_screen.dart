@@ -85,7 +85,7 @@ class _MovieNoteScreenState extends State<MovieNoteScreen> {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
         title: Text(
-          'M o v i a r y',
+          '영화 노트',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
